@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Pessoais - Cadastro</title>
+    <link rel="stylesheet" href="/css/styles.css">
+   
+
+</head>
+<body>
+    <header>
+        <h1>Dados pessoais</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <div class="info-box red">
+                <i class="fas fa-asterisk"></i> Os campos com <span class="required-star">*</span> (vermelho) precisam ser preenchidos obrigatoriamente.
+            </div>
+            <div class="info-box blue">
+                <i class="fas fa-info-circle"></i> Os campos com <span class="field-icons"><span class="icon-a">A</span> <span class="icon-triangle">▲</span></span> contêm informações que podem ser publicadas.
+            </div>
+
+            <p class="privacy-text">
+                Os dados coletados neste formulário têm como intuito específico promover os objetivos da RBMC. Informações sensíveis não serão divulgadas de modo indiscriminado. Por favor, para mais detalhes, leia os Termos de Consentimento para Coleta e Uso de Dados Pessoais RBMC. Destacamos que o preenchimento do questionário pode ser interrompido a qualquer momento e que ele leva em torno de 10 minutos.
+            </p>
+            <div class="privacy-checkbox">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">Declaro que li o <a href="#">Termo de Consentimento para Coleta e Uso de Dados Pessoais da RBMC</a> e estou de acordo de participar desta base de dados.</label>
+            </div>
+            <div class="privacy-text" style="text-align: center;">
+                <a href="#">LER POLÍTICA DE PRIVACIDADE</a>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <div class="form-field">
+                <label for="nome-completo">Qual seu nome completo? <span class="field-icons"><span class="icon-a">A</span> <span class="icon-triangle">▲</span></span><span class="required-star">*</span></label>
+                <input type="text" id="nome-completo" placeholder="Nome completo" required>
+            </div>
+
+            <div class="form-field">
+                <label for="email-contato">Qual seu e-mail para contato? <span class="required-star">*</span></label>
+                <input type="email" id="email-contato" placeholder="Seu e-mail" required>
+            </div>
+
+            <div class="form-field">
+                <label>Você deseja disponibilizar o seu e-mail para contato no banco de pesquisadoras? <span class="field-icons"><span class="icon-a">A</span> <span class="icon-triangle">▲</span></span><span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label for="email-sim"><input type="radio" id="email-sim" name="disponibilizar-email" value="sim" required> Sim</label>
+                    <label for="email-nao"><input type="radio" id="email-nao" name="disponibilizar-email" value="nao"> Não</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="telefone-contato">Qual seu telefone para contato? <span class="required-star">*</span></label>
+                <input type="tel" id="telefone-contato" placeholder="Seu telefone" required>
+            </div>
+
+            <div class="form-field">
+                <label for="data-nascimento">Qual a sua data de nascimento? <span class="required-star">*</span></label>
+                <input type="date" id="data-nascimento" value="2003-07-01" required> </div>
+
+            <div class="form-field">
+                <label for="nacionalidade">Qual a sua naturalidade? <span class="required-star">*</span></label>
+                <select id="nacionalidade" required>
+                    <option value="">Selecione</option>
+                    <option value="brasileira">Brasileira</option>
+                    <option value="outra">Outra</option>
+                    </select>
+            </div>
+
+            <div class="form-field">
+                <label for="cep">Onde você reside atualmente? Digite o seu CEP</label>
+                <input type="text" id="cep" placeholder="CEP">
+            </div>
+
+            <div class="form-field">
+                <label for="etnico-racial">Qual a sua autodeclaração étnico-racial? <span class="required-star">*</span></label>
+                <select id="etnico-racial" required>
+                    <option value="">Selecione</option>
+                    <option value="branca">Branca</option>
+                    <option value="preta">Preta</option>
+                    <option value="parda">Parda</option>
+                    <option value="amarela">Amarela</option>
+                    <option value="indigena">Indígena</option>
+                    </select>
+            </div>
+
+            <div class="form-field">
+                <label for="genero">Qual seu gênero? <span class="required-star">*</span></label>
+                <select id="genero" required>
+                    <option value="">Selecione</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="nao-binario">Não Binário</option>
+                    <option value="prefiro-nao-dizer">Prefiro não dizer</option>
+                    </select>
+            </div>
+
+            <div class="form-field">
+                <label>Você é uma pessoa com deficiência (PCD)? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label for="pcd-sim"><input type="radio" id="pcd-sim" name="pcd" value="sim" required> Sim</label>
+                    <label for="pcd-nao"><input type="radio" id="pcd-nao" name="pcd" value="nao"> Não</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="senha">Senha <span class="required-star">*</span></label>
+                <input type="password" id="senha" placeholder="Senha" required>
+            </div>
+
+            <div class="form-field">
+                <label for="confirmar-senha">Confirmar senha <span class="required-star">*</span></label>
+                <input type="password" id="confirmar-senha" placeholder="Confirmar senha" required>
+            </div>
+
+            <div class="form-field">
+                <label>Quero receber contato via email e/ou telefone</label>
+                <div class="radio-group">
+                    <label for="contato-sim"><input type="radio" id="contato-sim" name="receber-contato" value="sim"> Sim</label>
+                    <label for="contato-nao"><input type="radio" id="contato-nao" name="receber-contato" value="nao" checked> Não</label>
+                </div>
+            </div>
+
+            <div class="next-button-container">
+                <button type="submit" class="next-button">Próximo</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

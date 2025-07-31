@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Socioeconômicos - Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+</head>
+<body>
+    <header>
+        <h1>Dados socioeconômicos</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+
+            <div class="form-field">
+                <label for="pessoas-na-casa">Além de você, quantas pessoas moram na sua casa? <span class="required-star">*</span></label>
+                <input type="number" id="pessoas-na-casa" value="2" min="0" required>
+            </div>
+
+            <div class="form-field">
+                <label for="tem-filhos-dependentes">Você tem filhos ou dependentes? <span class="required-star">*</span></label>
+                <select id="tem-filhos-dependentes" required>
+                    <option value="">Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="nao" selected>Não</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="cuidadora-dependentes">Você é cuidadora de crianças, idosos e/ou pessoas com deficiência? <span class="required-star">*</span></label>
+                <select id="cuidadora-dependentes" required>
+                    <option value="">Selecione</option>
+                    <option value="sim" selected>Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="pessoas-economicamente-ativas">Quantas pessoas são economicamente ativas na sua família? <span class="required-star">*</span></label>
+                <input type="number" id="pessoas-economicamente-ativas" value="2" min="0" required>
+            </div>
+
+            <div class="form-field">
+                <label for="renda-media-familiar">Qual a sua renda média familiar? <span class="required-star">*</span></label>
+                <select id="renda-media-familiar" required>
+                    <option value="">Selecione</option>
+                    <option value="ate-1sm">Até R$ 1.412,00 (1 SM)</option>
+                    <option value="1a2sm">De R$ 1.412,01 a R$ 2.824,00 (1 a 2 SM)</option>
+                    <option value="2a3sm">De R$ 2.824,01 a R$ 4.236,00 (2 a 3 SM)</option>
+                    <option value="3a4sm" selected>De R$ 3.577,20 a R$ 4.769,60 (3 a 4 SM)</option>
+                    <option value="4a5sm">De R$ 4.769,61 a R$ 7.060,00 (4 a 5 SM)</option>
+                    <option value="mais-5sm">Acima de R$ 7.060,00 (Mais de 5 SM)</option>
+                    </select>
+            </div>
+
+            <div class="next-button-container">
+                <button type="submit" class="next-button">Próximo</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

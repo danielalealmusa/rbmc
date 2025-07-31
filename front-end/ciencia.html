@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mulheres na Ciência - Cadastro</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+<body>
+    <header>
+        <h1>Mulheres na ciência</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+
+            <div class="form-field">
+                <label>Você participa de algum projeto de extensão e/ou atividade de pesquisa em STEM (Ciência, Tecnologia, Engenharias Artes e Matemática)? <span class="field-icons"><span class="icon-a">A</span> <span class="icon-triangle">▲</span></span></label>
+                <div class="radio-group">
+                    <label for="stem-sim"><input type="radio" id="stem-sim" name="participa-stem" value="sim"> Sim</label>
+                    <label for="stem-nao"><input type="radio" id="stem-nao" name="participa-stem" value="nao" checked> Não</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label>Você participa de algum movimento social e/ou organização da sociedade civil? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label for="movimento-sim"><input type="radio" id="movimento-sim" name="participa-movimento" value="sim" checked required> Sim</label>
+                    <label for="movimento-nao"><input type="radio" id="movimento-nao" name="participa-movimento" value="nao"> Não</label>
+                    <label for="movimento-nao-responder"><input type="radio" id="movimento-nao-responder" name="participa-movimento" value="nao-responder"> Prefiro não responder</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="desafios-cientista">Quais os principais desafios você enfrentou ou enfrenta como cientista no Brasil? <span style="font-weight: normal;">(Selecione até 3 opções)</span> <span class="required-star">*</span></label>
+                <select id="desafios-cientista" multiple required>
+                    <option value="">Selecione até 3 opções</option>
+                    <option value="sobrecarga-domestico" selected>Sobrecarga de trabalho doméstico</option>
+                    <option value="machismo">Machismo no ambiente acadêmico/profissional</option>
+                    <option value="financiamento">Dificuldade de acesso a financiamento</option>
+                    <option value="networking">Falta de networking e oportunidades</option>
+                    <option value="visibilidade">Falta de visibilidade e reconhecimento</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="violencia-genero">Você já vivenciou algum tipo de violência de gênero? <span style="font-weight: normal;">(Selecione até 3 opções)</span> <span class="required-star">*</span></label>
+                <select id="violencia-genero" multiple required>
+                    <option value="">Selecione até 3 opções</option>
+                    <option value="psicologica" selected>Violência psicológica</option>
+                    <option value="fisica">Violência física</option>
+                    <option value="sexual">Violência sexual</option>
+                    <option value="moral">Violência moral/assédio</option>
+                    <option value="nao">Não vivenciei</option>
+                    <option value="prefiro-nao-dizer">Prefiro não dizer</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="links-publicacoes">Se desejar, disponibilize os links de até três das suas publicações mais relevantes. <span class="field-icons"><span class="icon-triangle">▲</span></span></label>
+                <textarea id="links-publicacoes" rows="4" placeholder="Insira os links aqui, um por linha."></textarea>
+            </div>
+
+            <div class="submit-button-container">
+                <button type="submit" class="submit-button">Cadastrar</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

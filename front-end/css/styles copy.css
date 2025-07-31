@@ -1,0 +1,678 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #d8cce8; /* Light purple background from the new image */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('http://s3.amazonaws.com/appforest_uf/f1656101864088x997392586360712700/924bbea037cab4ba5cf0dfc468ae0a8f.png'); 
+}
+
+.button-container {
+    text-align: left; /* Centraliza o conteúdo (o botão) dentro do container */
+    margin: 40px 0; /* Adiciona margem superior e inferior para espaçamento */
+}
+
+/* Estilo do botão em si */
+.btn-buscar-pesquisadoras {
+    display: inline-block; /* Permite aplicar padding e width/height, mas ainda respeita o text-align: center do pai */
+    padding: 15px 30px; /* Preenchimento interno do botão */
+    background-color: #240447; /* Um tom de roxo um pouco mais escuro no hover (Dark Violet) */
+    /* Cor de fundo roxa (Purple) */
+    color: white; /* Cor do texto do botão */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+    font-size: 1.1em; /* Tamanho da fonte */
+    font-weight: bold; /* Deixa o texto em negrito */
+    border-radius: 5px; /* Cantos levemente arredondados */
+    border: none; /* Remove a borda padrão do botão/link */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Efeito ao passar o mouse (hover) */
+.btn-buscar-pesquisadoras:hover {
+    background-color: #240447; /* Um tom de roxo um pouco mais escuro no hover (Dark Violet) */
+    transform: translateY(-2px); /* Efeito sutil de "levantar" */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada no hover */
+}
+
+/* Efeito ao clicar (active) */
+.btn-buscar-pesquisadoras:active {
+    background-color: #4B0082; /* Um tom de roxo ainda mais escuro no clique (Indigo) */
+    transform: translateY(0); /* Volta à posição original */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra mais sutil no clique */
+}
+    
+.btn-login {
+    display: inline-block; /* Permite aplicar padding e width/height, mas ainda respeita o text-align: center do pai */
+    padding: 15px 30px; /* Preenchimento interno do botão */
+    background-color: #240447; /* Um tom de roxo um pouco mais escuro no hover (Dark Violet) */
+    /* Cor de fundo roxa (Purple) */
+    color: white; /* Cor do texto do botão */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+    font-size: 1.1em; /* Tamanho da fonte */
+    font-weight: bold; /* Deixa o texto em negrito */
+    border-radius: 5px; /* Cantos levemente arredondados */
+    border: none; /* Remove a borda padrão do botão/link */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Efeito ao passar o mouse (hover) */
+.btn-login:hover {
+    background-color: #240447; /* Um tom de roxo um pouco mais escuro no hover (Dark Violet) */
+    transform: translateY(-2px); /* Efeito sutil de "levantar" */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada no hover */
+}
+
+/* Efeito ao clicar (active) */
+.btn-login:active {
+    background-color: #4B0082; /* Um tom de roxo ainda mais escuro no clique (Indigo) */
+    transform: translateY(0); /* Volta à posição original */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra mais sutil no clique */
+}
+
+
+/* Header Styles */
+.main-header {
+    background-color: #240447; /* Dark purple from the header */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    height: 150px; /* Adjust height based on the image */
+}
+
+.logo img {
+    height: 120px; /* Adjust the height of the logo as needed */
+    width: auto;
+}
+
+/* Main Content Wrapper for Layout */
+.content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px 0;
+    position: relative;
+    /* Adicione um padding lateral para garantir espaço e evitar que o conteúdo se cole às bordas */
+    padding-left: 5%;
+    padding-right: 5%; /* Adiciona um padding direito para o layout geral */
+    box-sizing: border-box;
+    width: 100%; /* Garante que o wrapper ocupe 100% da largura disponível */
+}
+
+.left-content {
+    flex-grow: 1; /* Permite que o conteúdo esquerdo cresça */
+    /* Remova padding-left/right daqui se já estiver no content-wrapper,
+        ou ajuste para controle mais fino se precisar de um padding adicional apenas para o left-content */
+    padding-right: 30px; /* Espaçamento entre o conteúdo esquerdo e o painel de login */
+    box-sizing: border-box;
+    /* Defina uma largura máxima para o left-content para dar espaço ao painel de login */
+    max-width: calc(100% - 350px); /* 100% da largura do wrapper - (largura do painel + espaçamento) */
+                                    /* 300px (largura do painel) + 50px (margem/gap) = 350px */
+}
+
+
+.right-sidebar {
+            flex: 1; /* Ocupa 1/3 do espaço disponível */
+            /* Esta div serve apenas como contêiner para o formulário */
+            padding: 0;
+            display: flex; /* Usamos flex aqui para centralizar o formulário dentro da sidebar */
+            justify-content: center; /* Centraliza horizontalmente o formulário */
+            align-items: flex-start; /* Alinha o formulário no topo da sidebar */
+        }
+/* Title Section (BANCO DE PESQUISADORAS) */
+.title-section {
+    background-color: #240447;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    width: fit-content;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.title-section h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* Main Text Block (BANCO DE PESQUISADORAS DA REDE...) */
+.main-text-block {
+    color: #240447;
+    font-size: 1.2em;
+    text-align: justify;
+    margin-top: 20px;
+    max-width: 800px; 
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.main-text-block h2 {
+    color: #240447;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+/* Estilos para o bloco de 3 colunas */
+/* Adicione estas regras ao seu arquivo css/styles.css */
+
+.three-column-text {
+    display: flex; /* Garante que as colunas fiquem lado a lado */
+    gap: 20px; /* Espaçamento entre as colunas */
+    flex-wrap: wrap; /* Permite que as colunas quebrem para a linha de baixo em telas menores */
+    justify-content: center; /* Centraliza as colunas */
+}
+
+.column-item {
+    flex: 1; /* Permite que as colunas cresçam e encolham igualmente */
+    padding: 20px;
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    min-width: 280px; /* Largura mínima para as colunas */
+    margin-bottom: 20px; /* Espaçamento inferior para quando as colunas quebrarem */
+}
+
+
+/* Seção de Pesquisa */
+.search-section {
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    flex: 1; /* Permite que os itens flex cresçam e encolham */
+    min-width: 50px; /* Garante que os campos não fiquem muito pequenos */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.input-group input[type="text"],
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #E6E6FA;
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden; /* Para garantir que o border-radius funcione na borda combinada */
+    background-color: var(--input-bg);
+}
+
+.search-input-wrapper input {
+    border: none;
+    flex-grow: 1;
+    padding: 12px 15px;
+    background-color: transparent; /* Permite que o fundo do wrapper seja visível */
+}
+
+.search-input-wrapper input:focus {
+    outline: none;
+}
+
+.search-button {
+    background-color: var(--primary-purple);
+    color: var(--white);
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    border-radius: 0 5px 5px 0; /* Apenas o canto direito */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    background-color: #5a099a; /* Um roxo um pouco mais escuro ao passar o mouse */
+}
+
+.full-width {
+    width: 100%;
+
+}
+
+.input-row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+    gap: 20px; /* Espaço entre os elementos */
+    margin-bottom: 20px;
+    /* Um roxo um pouco mais escuro ao passar o mouse */
+
+}
+
+
+.texto-left-italico {
+    text-align: justify; 
+    font-style: italic; /* Coloca o texto em itálico */
+    margin-left: 60px;
+    margin-bottom: 20px; /* Adiciona um espaço abaixo do texto, se desejar */
+    color: #240447; /* Opcional: define uma cor para o texto, se quiser */
+    font-size: 1.1em; /* Opcional: ajusta o tamanho da fonte, se quiser */
+}
+
+/* Cores para cada coluna */
+.three-column-text .column-item:nth-child(1) {
+    background-color: #E6E6FA;
+    border: 1px solid #800080;
+}
+
+.three-column-text .column-item:nth-child(2) {
+    background-color: #E6E6FA;
+    border: 1px solid #800080;
+}
+
+.three-column-text .column-item:nth-child(3) {
+    background-color: #E6E6FA;
+    border: 1px solid #800080;
+}
+
+.column-item h3 {
+    color: #333; /* Cor do título */
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.column-item p {
+    color: #555; /* Cor do texto */
+    line-height: 1.6;
+}
+
+/* Media Queries para responsividade, se necessário */
+@media (max-width: 768px) {
+    .three-column-text {
+        flex-direction: column; /* Empilha as colunas em telas menores */
+        align-items: center;
+    }
+
+    .column-item {
+        width: 90%; /* Ocupa mais largura em telas menores */
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column; /* Coloca os elementos um abaixo do outro */
+        align-items: center; /* Centraliza-os */
+        padding-left: 20px; /* Ajusta padding para telas menores */
+        padding-right: 20px; /* Ajusta padding para telas menores */
+    }
+
+    .left-content {
+        max-width: 100%; /* Permite que o left-content ocupe a largura total */
+        padding-right: 0; /* Remove o padding extra que separava do painel de login */
+        margin-bottom: 30px; /* Adiciona espaço abaixo do conteúdo esquerdo */
+    }
+
+    .title-section {
+        margin: 20px auto;
+    }
+
+    .main-text-block {
+        max-width: 100%; /* Texto ocupa a largura total disponível */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .right-login-panel {
+        position: static; /* Remove o posicionamento absoluto */
+        margin: 30px auto; /* Centraliza o painel de login abaixo */
+        width: 90%;
+        max-width: 400px;
+        top: auto;
+        right: auto;
+    }
+
+    .three-column-text {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+        gap: 20px;
+        padding: 0 20px; /* Adiciona padding nas laterais em telas menores */
+        max-width: 100%; /* Garante que o grid use toda a largura disponível */
+    }
+}
+
+@media (max-width: 768px) {
+    .three-column-text {
+        grid-template-columns: 1fr; /* Uma única coluna em telas menores */
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .main-header {
+        height: auto;
+        padding: 15px;
+    }
+
+    .logo img {
+        height: 100px;
+    }
+
+    .title-section h1 {
+        font-size: 1.5em;
+    }
+
+    .main-text-block h2 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .right-login-panel {
+        padding: 20px; /* Ajuste o padding do painel de login para telas muito pequenas */
+    }
+}
+
+/* Rodapé */
+.main-footer {
+    background-color: #3b0066; /* Cor de fundo escura, mesma do cabeçalho */
+    color: white; /* Cor do texto do rodapé */
+    padding: 30px 20px; /* Preenchimento interno */
+    text-align: center; /* Centraliza o texto */
+    margin-top: auto; /* Empurra o rodapé para o final, se 'body' for display: flex column */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    max-width: 1200px; /* Limita a largura do conteúdo do rodapé */
+    margin: 0 auto; /* Centraliza o conteúdo dentro do rodapé */
+    display: flex;
+    flex-direction: column; /* Organiza os itens em coluna por padrão */
+    align-items: center; /* Centraliza horizontalmente quando em coluna */
+}
+
+.main-footer p {
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #bbb; /* Cor um pouco mais clara para o texto de copyright */
+}
+
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #d8cce8; /* Cor mais clara no hover */
+    text-decoration: underline;
+}
+
+.footer-links .separator {
+    color: #888; /* Cor para o separador */
+    margin: 0 5px;
+}
+
+.social-media a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em; /* Ajuste se for usar ícones maiores */
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #d8cce8;
+}
+
+/* Responsividade do Rodapé */
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row; /* Em telas maiores, coloca os itens em linha */
+        justify-content: space-between; /* Espaçamento entre os itens */
+        align-items: center;
+    }
+
+    .main-footer p {
+        margin-bottom: 0; /* Remove margem inferior quando em linha */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        display: flex;
+        flex-direction: column; /* Links em coluna em telas muito pequenas */
+        margin-bottom: 10px;
+    }
+    .footer-links a {
+        margin: 5px 0; /* Espaçamento vertical entre links */
+    }
+    .footer-links .separator {
+        display: none; /* Esconde o separador em telas muito pequenas */
+    }
+}
+
+.social-media {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    font-size: 2em;
+}
+
+.social-media img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Estilos da tabela */
+.tabela-pesquisadoras {
+    width: 100%; /* Ocupa toda a largura disponível */
+    border-collapse: collapse; /* Adicionado para que as bordas se unam */
+    margin-top: 20px; /* Adiciona um espaço acima da tabela */
+    border: 1px solid #111111; /* Adicionado para a borda externa da tabela */
+}
+
+.tabela-pesquisadoras th,
+.tabela-pesquisadoras td {
+    border: 1px solid #111111; /* Borda leve para as células */
+    padding: 20px; /* Espaçamento interno nas células */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.tabela-pesquisadoras th {
+    background-color: #f2f2f2; /* Cor de fundo para o cabeçalho */
+    font-weight: bold; /* Deixa o texto do cabeçalho em negrito */
+}
+
+.tabela-pesquisadoras tr:nth-child(even) {
+    background-color: #f9f9f9; /* Colore linhas pares para melhor legibilidade */
+}
+
+.tabela-pesquisadoras tr:hover {
+    background-color: #f1f1f1; /* Efeito ao passar o mouse sobre a linha */
+}
+
+/* Estilo para links dentro da tabela */
+.tabela-pesquisadoras a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.tabela-pesquisadoras a:hover {
+    text-decoration: underline;
+}
+
+     .login-card { /* Mudei o nome da classe para .login-card para evitar conflitos com classes genéricas de "container" */
+            background-color:#b585c7;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 70%; /* Ocupa 100% da largura da .right-sidebar (que já tem um flex-basis) */
+            max-width: 400px; /* Limite a largura do card de login para que não fique muito largo */
+            text-align: center;
+        }
+
+        .login-card h2 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .login-card .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .login-card .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3b0066;
+            font-weight: bold;
+        }
+
+        .login-card .form-group input {
+            width: calc(100% - 20px); /* 100% da largura menos o padding */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .login-card button {
+            width: 100%;
+            padding: 12px;
+            background-color: #240447; /* Cor para o botão Entrar */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-card button:hover {
+            background-color: #3b0066; /* Cor de hover para Entrar */
+        }
+
+        .login-card button#registerBtn {
+            background-color: #a728a7; /* Cor que você definiu para o Cadastrar */
+        }
+
+        .login-card button#registerBtn:hover {
+            background-color: #8c1e8c; /* Uma cor mais escura para o hover de Cadastrar */
+        }
+
+        #message { /* ID do elemento de mensagem dentro do formulário */
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none; /* Escondido por padrão, será exibido via JS */
+        }
+        #message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        #message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .form2 {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    
+    /* Mantenha e ajuste estas propriedades */
+    max-width: 800px; /* Ajuste esta largura se o formulário estiver muito grande */
+    width: 100%; /* Garante que ele use 100% da largura disponível até max-width */
+    margin: 20px auto; /* Isso centraliza o bloco horizontalmente */
+    
+    display: flex; /* Já está lá para o layout interno do formulário */
+    flex-wrap: wrap; /* Já está lá */
+    gap: 20px; /* Já está lá */
+}
+.form-group2 { /* ALTERADO AQUI */
+    margin-bottom: 15px;
+    flex: 1 1 48%; /* Para layout de duas colunas, ajuste conforme necessário */
+}
+.form-group2 label { /* ALTERADO AQUI */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group2 input[type="text"], /* ALTERADO AQUI */
+.form-group2 input[type="email"], /* ALTERADO AQUI */
+.form-group2 input[type="tel"], /* ALTERADO AQUI */
+.form-group2 input[type="date"], /* ALTERADO AQUI */
+.form-group2 input[type="password"], /* ALTERADO AQUI */
+.form-group2 select, /* ALTERADO AQUI */
+.form-group2 textarea { /* ALTERADO AQUI */
+    width: calc(100% - 22px); /* Ajusta para padding e borda */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+}
+.form-group2 input[type="radio"], /* ALTERADO AQUI */
+.form-group2 input[type="checkbox"] { /* ALTERADO AQUI */
+    margin-right: 8px;
+}
+.form-group2 .radio-group label, /* ALTERADO AQUI */
+.form-group2 .checkbox-group label { /* ALTERADO AQUI */
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+}
+.conditional-fields { border-left: 3px solid #007bff; padding-left: 10px; margin-top: 10px; display: none; /* Controlado por JS */ }
+.add-item-container { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.add-item-container input { flex-grow: 1; }
+.add-item-container button { padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+.add-item-container button:hover { background-color: #218838; }
+.added-items { margin-top: 10px; }
+.added-item { background-color: #e9ecef; padding: 5px 10px; border-radius: 3px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
+.added-item button { background-color: #dc3545; border: none; color: white; padding: 3px 8px; border-radius: 3px; cursor: pointer; }
+.form-checkbox-group label { display: flex; align-items: center; margin-bottom: 10px; }
+.form-checkbox-group input[type="checkbox"] { margin-right: 10px; }
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+}
+button[type="submit"]:hover { background-color: #0056b3; }
+.message { padding: 10px; margin-top: 15px; border-radius: 5px; display: none; text-align: center; }
+.message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+   

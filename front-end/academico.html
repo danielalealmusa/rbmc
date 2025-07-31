@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações Acadêmicas - Cadastro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Informações acadêmicas</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+
+            <div class="form-field">
+                <label for="escolaridade">Qual a sua escolaridade? Preencha com a última titulação concluída. <span class="field-icons"><span class="icon-a">A</span> <span class="icon-triangle">▲</span></span></label>
+                <input type="text" id="escolaridade" placeholder="Sua titulação">
+            </div>
+
+            <div class="form-field">
+                <label for="estado-estudou">Em qual estado você estudou? <span class="required-star">*</span></label>
+                <input type="text" id="estado-estudou" placeholder="Nome do estado" required>
+            </div>
+
+            <div class="form-field">
+                <label for="ies-estudou">Em qual IES você estudou?</label>
+                <input type="text" id="ies-estudou" placeholder="Nome da Instituição de Ensino Superior">
+            </div>
+
+            <div class="form-field">
+                <label for="area-curso">Selecione área do curso</label>
+                <select id="area-curso">
+                    <option value="">Selecione a área</option>
+                    <option value="exatas">Ciências Exatas e da Terra</option>
+                    <option value="humanas">Ciências Humanas</option>
+                    <option value="biologicas">Ciências Biológicas</option>
+                    </select>
+            </div>
+
+            <div class="form-field">
+                <label for="curso">Insira o curso</label>
+                <input type="text" id="curso" placeholder="Nome do curso">
+            </div>
+
+            <div class="form-field">
+                <label for="temas-pesquisa">Que temas você mais pesquisou nos últimos 5 anos? Indique até 3 palavras-chave (clique no botão de + ao lado do retângulo para acrescentar cada palavra-chave): <span class="field-icons"><span class="icon-a">A</span> <span class="icon-triangle">▲</span></span><span class="required-star">*</span></label>
+                <div class="keyword-input-group">
+                    <input type="text" id="temas-pesquisa" placeholder="Palavra-chave" required>
+                    <button><i class="fas fa-plus"></i></button>
+                </div>
+                </div>
+
+            <div class="form-field">
+                <label>O seu ingresso e permanência nas Instituições de ensino de sua formação se deu através de programas/políticas de Inclusão e acesso? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label for="inclusao-sim"><input type="radio" id="inclusao-sim" name="programas-inclusao" value="sim" required> Sim</label>
+                    <label for="inclusao-nao"><input type="radio" id="inclusao-nao" name="programas-inclusao" value="nao"> Não</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label>Ao longo de sua formação, você foi contemplada com algum subsídio financeiro ou auxílio-permanência? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label for="subsidio-sim"><input type="radio" id="subsidio-sim" name="subsidio-permanencia" value="sim" required> Sim</label>
+                    <label for="subsidio-nao"><input type="radio" id="subsidio-nao" name="subsidio-permanencia" value="nao"> Não</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="curriculo-lattes">Insira abaixo o link do seu Currículo Lattes. <span class="field-icons"><span class="icon-a">A</span></span></label>
+                <input type="url" id="curriculo-lattes" placeholder="https://buscatextual.cnpq.br/buscatextual/">
+            </div>
+
+                       <div class="next-button-container">
+                <button type="submit" class="next-button">Próximo</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

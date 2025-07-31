@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Dados da Pesquisadora</title>
+    <link rel="stylesheet" href="/front-end/css/styles.css"> 
+    <style>
+        /* Adicione ou garanta que seu styles.css tenha estes estilos para campos não editáveis */
+        input[readonly],
+        select[disabled],
+        textarea[readonly] {
+            background-color: #e9e9e9; /* Um cinza mais claro */
+            cursor: not-allowed; /* Indica que o campo não pode ser clicado/editado */
+            border-color: #ccc;
+        }
+
+        /* Para desabilitar radios/checkboxes, mantendo a aparência, mas sem interatividade */
+        .radio-group input[type="radio"][disabled] + label,
+        .checkbox-group input[type="checkbox"][disabled] + label {
+            opacity: 0.7; /* Suaviza a cor para indicar que está desabilitado */
+            cursor: default;
+        }
+        .radio-group input[type="radio"][disabled],
+        .checkbox-group input[type="checkbox"][disabled] {
+            pointer-events: none; /* Impede cliques */
+        }
+
+        /* Estilo para itens adicionados dinamicamente (palavras-chave, publicações) */
+        .added-item {
+            display: inline-block;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .add-item-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .add-item-container input {
+            flex-grow: 1;
+        }
+        .add-item-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        /* Ocultar o botão de adicionar e o input se o formulário for apenas para visualização */
+        .form2.view-only .add-item-container {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <img src="img/marcabranca-RBMC.png" alt="Rede Brasileira Mulheres Cientistas Logo">
+        </div>
+    </header>
+
+    <form id="cadastroForm" class="form2 view-only">
+        <h1>Dados da Pesquisadora</h1>
+        <div id="messageDiv" class="message"></div>
+
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+            <div class="form-group2">
+                <label for="fullName">Nome completo:</label>
+                <input type="text" id="fullName" name="fullName" **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label for="contactEmail">E-mail para contato:</label>
+                <input type="email" id="contactEmail" name="contactEmail" **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label>Deseja disponibilizar o seu e-mail para contato no banco de pesquisadoras?</label>
+                <div class="radio-group">
+                    <input type="radio" id="emailPublicYes" name="emailPublic" value="sim" **disabled**>
+                    <label for="emailPublicYes">Sim</label>
+                    <input type="radio" id="emailPublicNo" name="emailPublic" value="nao" **disabled**>
+                    <label for="emailPublicNo">Não</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label for="contactPhone">Telefone para contato:</label>
+                <input type="tel" id="contactPhone" name="contactPhone" placeholder="(XX) XXXXX-XXXX" **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label for="birthDate">Data de nascimento:</label>
+                <input type="date" id="birthDate" name="birthDate" **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label>Qual a sua naturalidade?</label>
+                <div class="radio-group">
+                    <input type="radio" id="nationalityBrazilian" name="nationality" value="brasileira" **disabled**>
+                    <label for="nationalityBrazilian">Brasileira</label>
+                    <input type="radio" id="nationalityForeign" name="nationality" value="estrangeira" **disabled**>
+                    <label for="nationalityForeign">Estrangeira</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label for="cep">CEP de residência:</label>
+                <input type="text" id="cep" name="cep" placeholder="XXXXX-XXX" **readonly**>
+            </div>
+
+            <div class="form-group">
+                <label>Autodeclaração étnico-racial:</label>
+                <div class="radio-group">
+                    <input type="radio" id="raceYellow" name="ethnicity" value="amarela" **disabled**> <label for="raceYellow">Amarela</label>
+                    <input type="radio" id="raceWhite" name="ethnicity" value="branca" **disabled**> <label for="raceWhite">Branca</label>
+                    <input type="radio" id="raceIndigenous" name="ethnicity" value="indigena" **disabled**> <label for="raceIndigenous">Indígena</label>
+                    <input type="radio" id="raceBrown" name="ethnicity" value="parda" **disabled**> <label for="raceBrown">Parda</label>
+                    <input type="radio" id="raceBlack" name="ethnicity" value="preta" **disabled**> <label for="raceBlack">Preta</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Gênero:</label>
+                <div class="radio-group">
+                    <input type="radio" id="genderHetero" name="gender" value="heterossexual" **disabled**> <label for="genderHetero">Heterossexual</label>
+                    <input type="radio" id="genderHomo" name="gender" value="homossexual" **disabled**> <label for="genderHomo">Homossexual</label>
+                    <input type="radio" id="genderBi" name="gender" value="bissexual" **disabled**> <label for="genderBi">Bissexual</label>
+                    <input type="radio" id="genderPan" name="gender" value="pansexual" **disabled**> <label for="genderPan">Pansexual</label>
+                    <input type="radio" id="genderA" name="gender" value="assexual" **disabled**> <label for="genderA">Assexual</label>
+                    <input type="radio" id="genderPreferNot" name="gender" value="prefiro_nao_responder" **disabled**> <label for="genderPreferNot">Prefiro não responder</label>
+                    <input type="radio" id="genderOther" name="gender" value="outro" **disabled**> <label for="genderOther">Outro:</label>
+                    <input type="text" id="genderOtherText" name="genderOtherText" style="display: none;" **readonly**>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Você é uma pessoa com deficiência (PCD)?</label>
+                <div class="radio-group">
+                    <input type="radio" id="pcdYes" name="pcd" value="sim" **disabled**> <label for="pcdYes">Sim</label>
+                    <input type="radio" id="pcdNo" name="pcd" value="nao" **disabled**> <label for="pcdNo">Não</label>
+                </div>
+                <div class="conditional-fields" id="pcdDeficiencyFields" style="display: none;">
+                    <label for="deficiencies">Qual(is) deficiência(s)?</label>
+                    <textarea id="deficiencies" name="deficiencies" rows="3" **readonly**></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Informações de Acesso</legend>
+            <div class="form-checkbox-group">
+                <input type="checkbox" id="receiveContact" name="receiveContact" value="yes" **disabled**>
+                <label for="receiveContact">Quero receber contato via email e/ou telefone</label>
+            </div>
+            <div class="form-checkbox-group">
+                <input type="checkbox" id="noInfoRbmc" name="noInfoRbmc" value="yes" **disabled**>
+                <label for="noInfoRbmc">Não quero receber informações e/ou participar de ações da RBMC</label>
+            </div>
+            <div class="form-checkbox-group">
+                <input type="checkbox" id="privacyPolicy" name="privacyPolicy" value="yes" **disabled**>
+                <label for="privacyPolicy">Li e concordo com a política de privacidade da RBMC e desejo continuar.</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Informações de Escolaridade e Pesquisa</legend>
+            <div class="form-group2">
+                <label for="highestEducation">Qual a sua escolaridade? (Maior/última titulação concluída)</label>
+                <select id="highestEducation" name="highestEducation" **disabled**>
+                    <option value="">Selecione</option>
+                    <option value="graduacao">Graduação</option>
+                    <option value="mestrado">Mestrado</option>
+                    <option value="doutorado">Doutorado</option>
+                </select>
+            </div>
+
+            <div class="form-group2">
+                <label for="educationState">Em qual estado você obteve sua maior titulação/estudou?</label>
+                <select id="educationState" name="educationState" **disabled**>
+                    <option value="">Carregando estados...</option>
+                    <option value="exterior">Exterior</option>
+                    </select>
+            </div>
+
+            <div class="form-group2">
+                <label for="educationIES">Em qual IES você obteve sua maior titulação/estudou?</label>
+                <input type="text" id="educationIES" name="educationIES" **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label for="courseArea">Selecione área do curso</label>
+                <select id="courseArea" name="courseArea" **disabled**>
+                    <option value="">Selecione</option>
+                    <option value="ciencias_exatas_terra">Ciências Exatas e da Terra</option>
+                    <option value="ciencias_biologicas">Ciências Biológicas</option>
+                    <option value="engenharias">Engenharias</option>
+                    <option value="ciencias_saude">Ciências da Saúde</option>
+                    <option value="ciencias_agrarias">Ciências Agrárias</option>
+                    <option value="ciencias_sociais_aplicadas">Ciências Sociais Aplicadas</option>
+                    <option value="ciencias_humanas_linguistica">Ciências Humanas e Linguística</option>
+                    <option value="letras_artes">Letras e Artes</option>
+                </select>
+            </div>
+
+            <div class="form-group2">
+                <label for="courseName">Insira o curso</label>
+                <input type="text" id="courseName" name="courseName" **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label>Quais temas você mais pesquisou nos últimos 5 anos? (Até 3 palavras-chave)</label>
+                <div id="keywordsContainer">
+                    <div class="add-item-container">
+                        <input type="text" id="keywordInput" placeholder="Palavra-chave" **readonly**>
+                        <button type="button" id="addKeywordBtn" style="display: none;">+</button>
+                    </div>
+                    <div class="added-items" id="keywordsList">
+                        </div>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Seu ingresso e permanência no Ensino Superior/instituições de ensino se deu através de programas/políticas de inclusão e acesso?</label>
+                <div class="radio-group">
+                    <input type="radio" id="inclusionProgramYes" name="inclusionProgram" value="sim" **disabled**> <label for="inclusionProgramYes">Sim</label>
+                    <input type="radio" id="inclusionProgramNo" name="inclusionProgram" value="nao" **disabled**> <label for="inclusionProgramNo">Não</label>
+                </div>
+                <div class="conditional-fields" id="inclusionProgramDetails" style="display: none;">
+                    <label>Quais?</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="prouni" name="inclusionType" value="prouni" **disabled**> <label for="prouni">ProUuni</label><br>
+                        <input type="checkbox" id="fies" name="inclusionType" value="fies" **disabled**> <label for="fies">Fies</label><br>
+                        <input type="checkbox" id="affirmativeActions" name="inclusionType" value="acoes_afirmativas" **disabled**> <label for="affirmativeActions">Ações afirmativas</label><br>
+                        <input type="checkbox" id="quotas" name="inclusionType" value="cotas" **disabled**> <label for="quotas">Cotas</label><br>
+                        <input type="checkbox" id="otherInclusion" name="inclusionType" value="outras" **disabled**> <label for="otherInclusion">Outras</label><br>
+                        <input type="text" id="otherInclusionText" name="otherInclusionText" style="display: none;" placeholder="Especifique outras" **readonly**>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Ao longo de sua formação, você foi contemplada com algum subsídio financeiro ou auxílio-permanência?</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="scholarshipCapesCnpq" name="financialAid" value="bolsa_pesquisa_capes_cnpq" **disabled**> <label for="scholarshipCapesCnpq">Bolsa de pesquisa (CAPES, CNPq ou outras instituições).</label><br>
+                    <input type="checkbox" id="researchFunding" name="financialAid" value="financiamento_pesquisa_extensao" **disabled**> <label for="researchFunding">Financiamento de pesquisa ou projeto de extensão (instituições públicas ou privadas).</label><br>
+                    <input type="checkbox" id="permanenceAid" name="financialAid" value="auxilios_programas_permanencia" **disabled**> <label for="permanenceAid">Auxílios e/ou programas de permanência (auxílio-alimentação, auxílio-moradia ou residência universitária, auxílio-permanência, etc).</label><br>
+                    <input type="checkbox" id="undergradScholarships" name="financialAid" value="bolsas_graduacao" **disabled**> <label for="undergradScholarships">Bolsas de graduação (monitoria, PIBIC, PIBID, PET, PIBIT, etc).</label><br>
+                    <input type="checkbox" id="noAid" name="financialAid" value="nao_contemplada" **disabled**> <label for="noAid">Não fui contemplada(e) com nenhum tipo de auxílio ou subsídio financeiro.</label><br>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label for="lattesLink">Link do seu Currículo Lattes:</label>
+                <input type="url" id="lattesLink" name="lattesLink" placeholder="https://lattes.cnpq.br/..." **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label for="orcidLink">Link do seu ORCID:</label>
+                <input type="url" id="orcidLink" name="orcidLink" placeholder="https://orcid.org/..." **readonly**>
+            </div>
+
+            <div class="form-group2">
+                <label>Links de até três das suas publicações mais relevantes:</label>
+                <div id="publicationsContainer">
+                    <div class="add-item-container">
+                        <input type="url" id="publicationInput" placeholder="Link da publicação" **readonly**>
+                        <button type="button" id="addPublicationBtn" style="display: none;">+</button>
+                    </div>
+                    <div class="added-items" id="publicationsList">
+                        </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Atuação Profissional</legend>
+            <div class="form-group2">
+                <label>Qual a sua atuação profissional hoje?</label>
+                <div class="radio-group">
+                    <input type="radio" id="roleDocentePesquisadora" name="professionalRole" value="docente_pesquisadora" **disabled**> <label for="roleDocentePesquisadora">Docente/Pesquisadora em Instituição de Ensino Superior pública, privada ou do terceiro setor</label><br>
+                    <input type="radio" id="rolePesquisadora" name="professionalRole" value="pesquisadora" **disabled**> <label for="rolePesquisadora">Pesquisadora em Instituição de ensino e/ou pesquisa pública, privada ou do terceiro setor</label><br>
+                    <input type="radio" id="roleStudent" name="professionalRole" value="estudante_pos_graduacao" **disabled**> <label for="roleStudent">Estudante de pós-graduação</label><br>
+                    <input type="radio" id="roleNotResearcher" name="professionalRole" value="atuando_nao_pesquisadora" **disabled**> <label for="roleNotResearcher">Estou atuando profissionalmente, mas não como pesquisadora</label><br>
+                    <input type="radio" id="roleNotWorking" name="professionalRole" value="nao_atuando" **disabled**> <label for="roleNotWorking">Não estou atuando profissionalmente</label><br>
+                </div>
+            </div>
+
+            <div class="conditional-fields" id="docentePesquisadoraFields" style="display: none;">
+                <div class="form-group2">
+                    <label for="docenteWorkState">Em qual estado você trabalha?</label>
+                    <select id="docenteWorkState" name="docenteWorkState" **disabled**>
+                        <option value="">Carregando estados...</option>
+                    </select>
+                </div>
+                <div class="form-group2">
+                    <label for="docenteDepartment">Em qual departamento ou curso você trabalha?</label>
+                    <input type="text" id="docenteDepartment" name="docenteDepartment" **readonly**>
+                </div>
+            </div>
+
+            <div class="conditional-fields" id="pesquisadoraFields" style="display: none;">
+                <div class="form-group2">
+                    <label for="pesquisadoraWorkState">Em qual estado você trabalha?</label>
+                    <select id="pesquisadoraWorkState" name="pesquisadoraWorkState" **disabled**>
+                        <option value="">Carregando estados...</option>
+                    </select>
+                </div>
+                <div class="form-group2">
+                    <label for="pesquisadoraRole">Qual cargo ou função você ocupa?</label>
+                    <input type="text" id="pesquisadoraRole" name="pesquisadoraRole" **readonly**>
+                </div>
+            </div>
+
+            <div class="conditional-fields" id="studentFields" style="display: none;">
+                <div class="form-group2">
+                    <label for="studentStudyState">Em qual estado você estuda?</label>
+                    <select id="studentStudyState" name="studentStudyState" **disabled**>
+                        <option value="">Carregando estados...</option>
+                    </select>
+                </div>
+                <div class="form-group2">
+                    <label>Em qual programa de pós-graduação você está regularmente matriculada?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="pgMestrado" name="pgType" value="mestrado" **disabled**> <label for="pgMestrado">Mestrado</label>
+                        <input type="radio" id="pgDoutorado" name="pgType" value="doutorado" **disabled**> <label for="pgDoutorado">Doutorado</label>
+                    </div>
+                </div>
+                <div class="form-group2">
+                    <label for="pgArea">Selecionar área do programa</label>
+                    <select id="pgArea" name="pgArea" **disabled**>
+                        <option value="">Selecione</option>
+                        <option value="ciencias_exatas_terra">Ciências Exatas e da Terra</option>
+                        <option value="ciencias_biologicas">Ciências Biológicas</option>
+                        <option value="engenharias">Engenharias</option>
+                        <option value="ciencias_saude">Ciências da Saúde</option>
+                        <option value="ciencias_agrarias">Ciências Agrárias</option>
+                        <option value="ciencias_sociais_aplicadas">Ciências Sociais Aplicadas</option>
+                        <option value="ciencias_humanas">Ciências Humanas</option>
+                        <option value="linguistica_letras_artes">Linguística, Letras e Artes</option>
+                    </select>
+                </div>
+                <div class="form-group2">
+                    <label for="pgProgramName">Inserir programa</label>
+                    <input type="text" id="pgProgramName" name="pgProgramName" **readonly**>
+                </div>
+            </div>
+
+            <div class="conditional-fields" id="notResearcherFields" style="display: none;">
+                <div class="form-group2">
+                    <label>Por que você não está atuando profissionalmente como pesquisadora?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="noInterestResearcher" name="notResearcherReason" value="no_interest" **disabled**> <label for="noInterestResearcher">Não tenho interesse em atuar profissionalmente como pesquisadora.</label><br>
+                        <input type="radio" id="notAbleResearcher" name="notResearcherReason" value="not_able" **disabled**> <label for="notAbleResearcher">Tenho interesse, mas não consegui atuar profissionalmente como pesquisadora.</label><br>
+                        <input type="radio" id="preferNotResearcher" name="notResearcherReason" value="prefer_not" **disabled**> <label for="preferNotResearcher">Prefiro não responder.</label><br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conditional-fields" id="notWorkingFields" style="display: none;">
+                <div class="form-group2">
+                    <label>Por que você não está atuando profissionalmente?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="notLookingJob" name="notWorkingReason" value="not_looking" **disabled**> <label for="notLookingJob">Não estou procurando emprego no momento.</label><br>
+                        <input type="radio" id="cannotWork" name="notWorkingReason" value="cannot_work" **disabled**> <label for="cannotWork">Não posso/consigo trabalhar no momento.</label><br>
+                        <input type="radio" id="unemployed" name="notWorkingReason" value="unemployed" **disabled**> <label for="unemployed">Estou desempregada (tenho procurado emprego, mas não consegui ainda).</label><br>
+                        <input type="radio" id="retired" name="notWorkingReason" value="retired" **disabled**> <label for="retired">Estou aposentada.</label><br>
+                        <input type="radio" id="otherReasonsNotWorking" name="notWorkingReason" value="other_reasons" **disabled**> <label for="otherReasonsNotWorking">Outras razões.</label><br>
+                        <input type="radio" id="preferNotWorking" name="notWorkingReason" value="prefer_not" **disabled**> <label for="preferNotWorking">Prefiro não responder.</label><br>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>DADOS SOCIOECONÔMICOS</legend>
+            <div class="form-group2">
+                <label for="householdMembers">Além de você, quantas pessoas moram na sua casa?</label>
+                <select id="householdMembers" name="householdMembers" **disabled**>
+                    <option value="">Selecione</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="more_than_10">Mais que 10</option>
+                    <option value="prefer_not_answer">Prefiro não responder</option>
+                </select>
+            </div>
+
+            <div class="form-group2">
+                <label>Você tem filhos ou dependentes?</label>
+                <div class="radio-group">
+                    <input type="radio" id="hasChildrenYes" name="hasChildren" value="sim" **disabled**> <label for="hasChildrenYes">Sim</label>
+                    <input type="radio" id="hasChildrenNo" name="hasChildren" value="nao" **disabled**> <label for="hasChildrenNo">Não</label>
+                    <input type="radio" id="hasChildrenPreferNot" name="hasChildren" value="prefiro_nao_responder" **disabled**> <label for="hasChildrenPreferNot">Prefiro não responder</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Você é cuidadora de crianças, idosos e/ou pessoas com deficiência?</label>
+                <div class="radio-group">
+                    <input type="radio" id="isCaregiverYes" name="isCaregiver" value="sim" **disabled**> <label for="isCaregiverYes">Sim</label>
+                    <input type="radio" id="isCaregiverNo" name="isCaregiver" value="nao" **disabled**> <label for="isCaregiverNo">Não</label>
+                    <input type="radio" id="isCaregiverPreferNot" name="isCaregiver" value="prefiro_nao_responder" **disabled**> <label for="isCaregiverPreferNot">Prefiro não responder</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label for="economicActiveMembers">Quantas pessoas são economicamente ativas na sua família?</label>
+                <select id="economicActiveMembers" name="economicActiveMembers" **disabled**>
+                    <option value="">Selecione</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5_or_more">5 ou mais</option>
+                    <option value="prefer_not_answer">Prefiro não responder</option>
+                </select>
+            </div>
+
+            <div class="form-group2">
+                <label for="familyIncome">Qual a sua renda média familiar?</label>
+                <select id="familyIncome" name="familyIncome" **disabled**>
+                    <option value="">Selecione</option>
+                    <option value="0_1_sm">Até 1 Salário Mínimo</option>
+                    <option value="1_2_sm">de 1 a 2 Salários Mínimos</option>
+                    <option value="3_4_sm">de 3 a 4 Salários Mínimos</option>
+                    <option value="5_6_sm">de 5 a 6 Salários Mínimos</option>
+                    <option value="7_8_sm">de 7 a 8 Salários Mínimos</option>
+                    <option value="9_10_sm">de 9 a 10 Salários Mínimos</option>
+                    <option value="above_10_sm">Acima de 10 Salários Mínimos</option>
+                    <option value="prefer_not_answer">Prefiro não responder</option>
+                </select>
+            </div>
+
+            <div class="form-group2">
+                <label>Você participa de algum projeto de extensão e/ou atividade de pesquisa em STEM (Ciência, Tecnologia, Engenharias Artes e Matemática)?</label>
+                <div class="radio-group">
+                    <input type="radio" id="participateStemYes" name="participateStem" value="sim" **disabled**> <label for="participateStemYes">Sim</label>
+                    <input type="radio" id="participateStemNo" name="participateStem" value="nao" **disabled**> <label for="participateStemNo">Não</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Você participa de algum movimento social e/ou organização da sociedade civil?</label>
+                <div class="radio-group">
+                    <input type="radio" id="participateSocialYes" name="participateSocial" value="sim" **disabled**> <label for="participateSocialYes">Sim</label>
+                    <input type="radio" id="participateSocialNo" name="participateSocial" value="nao" **disabled**> <label for="participateSocialNo">Não</label>
+                    <input type="radio" id="participateSocialPreferNot" name="participateSocial" value="prefiro_nao_responder" **disabled**> <label for="participateSocialPreferNot">Prefiro não responder</label>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Quais os principais desafios você enfrentou ou enfrenta como pesquisadora/cientista no Brasil? (Até 3 opções)</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="challengeSubfunding" name="challenges" value="subfinanciamento" **disabled**> <label for="challengeSubfunding">Subfinanciamento</label><br>
+                    <input type="checkbox" id="challengeDomesticOverload" name="challenges" value="sobrecarga_trabalho_domestico" **disabled**> <label for="challengeDomesticOverload">Sobrecarga de trabalho doméstico</label><br>
+                    <input type="checkbox" id="challengeSalaryDisparity" name="challenges" value="disparidade_salarial" **disabled**> <label for="challengeSalaryDisparity">Disparidade salarial</label><br>
+                    <input type="checkbox" id="challengeMaternity" name="challenges" value="dificuldades_conciliar_maternidade" **disabled**> <label for="challengeMaternity">Dificuldades em conciliar com a maternidade</label><br>
+                    <input type="checkbox" id="challengeNoFinancialSupport" name="challenges" value="falta_apoio_financeiro" **disabled**> <label for="challengeNoFinancialSupport">Falta de apoio financeiro</label><br>
+                    <input type="checkbox" id="challengeNoPsychologicalSupport" name="challenges" value="falta_apoio_psicologico" **disabled**> <label for="challengeNoPsychologicalSupport">Falta de apoio psicológico</label><br>
+                    <input type="checkbox" id="challengeNoAcademicSupport" name="challenges" value="falta_apoio_academico" **disabled**> <label for="challengeNoAcademicSupport">Falta de apoio acadêmico</label><br>
+                    <input type="checkbox" id="challengeEmployment" name="challenges" value="dificuldades_conseguir_emprego" **disabled**> <label for="challengeEmployment">Dificuldades em conseguir emprego</label><br>
+                    <input type="checkbox" id="challengeRacism" name="challenges" value="racismo" **disabled**> <label for="challengeRacism">Racismo</label><br>
+                    <input type="checkbox" id="challengeLgbtfobia" name="challenges" value="lgbtfobia" **disabled**> <label for="challengeLgbtfobia">LGBTfobia</label><br>
+                    <input type="checkbox" id="challengeHarassment" name="challenges" value="assedio" **disabled**> <label for="challengeHarassment">Assédio (moral, sexual, psicológico, etc.)</label><br>
+                    <input type="checkbox" id="challengeXenophobia" name="challenges" value="xenofobia" **disabled**> <label for="challengeXenophobia">Xenofobia</label><br>
+                    <input type="checkbox" id="challengeOtherDiscrimination" name="challenges" value="outros_discriminacao" **disabled**> <label for="challengeOtherDiscrimination">Outros tipos de discriminação</label><br>
+                </div>
+            </div>
+
+            <div class="form-group2">
+                <label>Você já vivenciou algum tipo de violência de gênero? (Até 3 opções)</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="violenceMoral" name="genderViolence" value="assedio_moral" **disabled**> <label for="violenceMoral">Assédio moral</label><br>
+                    <input type="checkbox" id="violenceSexual" name="genderViolence" value="assedio_sexual" **disabled**> <label for="violenceSexual">Assédio sexual</label><br>
+                    <input type="checkbox" id="violencePsychological" name="genderViolence" value="violencia_psicologica" **disabled**> <label for="violencePsychological">Violência psicológica</label><br>
+                    <input type="checkbox" id="violencePhysical" name="genderViolence" value="violencia_fisica" **disabled**> <label for="violencePhysical">Violência física</label><br>
+                    <input type="checkbox" id="violencePolitical" name="genderViolence" value="violencia_politica" **disabled**> <label for="violencePolitical">Violência política</label><br>
+                    <input type="checkbox" id="violencePatrimonial" name="genderViolence" value="violencia_patrimonial" **disabled**> <label for="violencePatrimonial">Violência patrimonial</label><br>
+                    <input type="checkbox" id="violenceAll" name="genderViolence" value="todos_tipos_violencia" **disabled**> <label for="violenceAll">Todos os tipos de violência</label><br>
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit" style="display: none;">Cadastrar</button>
+    </form>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cadastroForm = document.getElementById('cadastroForm');
+            const messageDiv = document.getElementById('messageDiv');
+            
+            // Adiciona a classe 'view-only' ao formulário se o objetivo for apenas visualizar os dados
+            // Isso pode ser controlado por uma lógica na URL, por exemplo:
+            // const urlParams = new URLSearchParams(window.location.search);
+            // if (urlParams.get('mode') === 'view') {
+            //     cadastroForm.classList.add('view-only');
+            // }
+            cadastroForm.classList.add('view-only'); // Força o modo de visualização para este exemplo
+
+            function showMessage(message, type = 'info') {
+                messageDiv.textContent = message;
+                messageDiv.className = `message ${type}`;
+                messageDiv.style.display = 'block';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                    messageDiv.textContent = '';
+                }, 5000);
+            }
+
+            // --- Lógica para buscar e preencher os dados ---
+            const userId = 1; // **IMPORTANTE:** Este ID deve vir dinamicamente, da URL, etc.
+            const apiUrl = `http://localhost:3000/api/pesquisadoras/${userId}`; // Adapte sua URL da API
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar dados: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+
+                // Preencher Dados Pessoais
+                document.getElementById('fullName').value = data.fullName || '';
+                document.getElementById('contactEmail').value = data.contactEmail || '';
+                if (data.emailPublic) {
+                    document.getElementById('emailPublic' + (data.emailPublic === 'sim' ? 'Yes' : 'No')).checked = true;
+                }
+                document.getElementById('contactPhone').value = data.contactPhone || '';
+                if (data.birthDate) {
+                    const date = new Date(data.birthDate);
+                    const formattedDate = date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+                    document.getElementById('birthDate').value = formattedDate;
+                }
+                if (data.nationality) {
+                    document.getElementById('nationality' + (data.nationality === 'brasileira' ? 'Brazilian' : 'Foreign')).checked = true;
+                }
+                document.getElementById('cep').value = data.cep || '';
+                if (data.ethnicity) {
+                    document.getElementById('race' + data.ethnicity.charAt(0).toUpperCase() + data.ethnicity.slice(1)).checked = true;
+                }
+                if (data.gender) {
+                    const genderRadio = document.getElementById('gender' + data.gender.charAt(0).toUpperCase() + data.gender.slice(1));
+                    if (genderRadio) {
+                        genderRadio.checked = true;
+                        if (data.gender === 'outro' && data.genderOtherText) {
+                            document.getElementById('genderOtherText').value = data.genderOtherText;
+                            document.getElementById('genderOtherText').style.display = 'block';
+                        }
+                    }
+                }
+                if (data.pcd) {
+                    document.getElementById('pcd' + (data.pcd === 'sim' ? 'Yes' : 'No')).checked = true;
+                    if (data.pcd === 'sim' && data.deficiencies) {
+                        document.getElementById('pcdDeficiencyFields').style.display = 'block';
+                        document.getElementById('deficiencies').value = data.deficiencies;
+                    }
+                }
+
+                // Preencher Informações de Acesso
+                document.getElementById('receiveContact').checked = data.receiveContact === 'yes';
+                document.getElementById('noInfoRbmc').checked = data.noInfoRbmc === 'yes';
+                document.getElementById('privacyPolicy').checked = data.privacyPolicy === 'yes';
+
+                // Preencher Informações de Escolaridade e Pesquisa
+                if (data.highestEducation) {
+                    document.getElementById('highestEducation').value = data.highestEducation;
+                }
+                if (data.educationState) {
+                    // Para SELECTs de estados, você pode precisar preencher as opções antes ou ter as opções estáticas
+                    document.getElementById('educationState').value = data.educationState;
+                }
+                document.getElementById('educationIES').value = data.educationIES || '';
+                if (data.courseArea) {
+                    document.getElementById('courseArea').value = data.courseArea;
+                }
+                document.getElementById('courseName').value = data.courseName || '';
+
+                // Palavras-chave (assumindo que 'keywords' é um array no backend)
+                const keywordsList = document.getElementById('keywordsList');
+                if (data.keywords && Array.isArray(data.keywords)) {
+                    keywordsList.innerHTML = ''; // Limpa antes de adicionar
+                    data.keywords.forEach(keyword => {
+                        const span = document.createElement('span');
+                        span.className = 'added-item';
+                        span.textContent = keyword;
+                        keywordsList.appendChild(span);
+                    });
+                }
+                
+                if (data.inclusionProgram) {
+                    document.getElementById('inclusionProgram' + (data.inclusionProgram === 'sim' ? 'Yes' : 'No')).checked = true;
+                    if (data.inclusionProgram === 'sim' && data.inclusionType && Array.isArray(data.inclusionType)) {
+                        document.getElementById('inclusionProgramDetails').style.display = 'block';
+                        data.inclusionType.forEach(type => {
+                            const checkbox = document.getElementById(type);
+                            if (checkbox) checkbox.checked = true;
+                            if (type === 'outras' && data.otherInclusionText) {
+                                document.getElementById('otherInclusionText').value = data.otherInclusionText;
+                                document.getElementById('otherInclusionText').style.display = 'block';
+                            }
+                        });
+                    }
+                }
+
+                if (data.financialAid && Array.isArray(data.financialAid)) {
+                    data.financialAid.forEach(aid => {
+                        const checkbox = document.getElementById(aid);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+
+                document.getElementById('lattesLink').value = data.lattesLink || '';
+                document.getElementById('orcidLink').value = data.orcidLink || '';
+
+                // Publicações (assumindo que 'publications' é um array de URLs no backend)
+                const publicationsList = document.getElementById('publicationsList');
+                if (data.publications && Array.isArray(data.publications)) {
+                    publicationsList.innerHTML = ''; // Limpa antes de adicionar
+                    data.publications.forEach(url => {
+                        const span = document.createElement('span');
+                        span.className = 'added-item';
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.textContent = url;
+                        a.target = '_blank'; // Abrir em nova aba
+                        span.appendChild(a);
+                        publicationsList.appendChild(span);
+                    });
+                }
+
+
+                // Preencher Atuação Profissional e campos condicionais
+                if (data.professionalRole) {
+                    const roleRadio = document.getElementById('role' + data.professionalRole.charAt(0).toUpperCase() + data.professionalRole.slice(1));
+                    if (roleRadio) {
+                        roleRadio.checked = true;
+                    }
+
+                    // Lógica para mostrar/esconder campos condicionais baseada no valor do backend
+                    if (data.professionalRole === 'docente_pesquisadora') {
+                        document.getElementById('docentePesquisadoraFields').style.display = 'block';
+                        document.getElementById('docenteWorkState').value = data.docenteWorkState || '';
+                        document.getElementById('docenteDepartment').value = data.docenteDepartment || '';
+                    } else if (data.professionalRole === 'pesquisadora') {
+                        document.getElementById('pesquisadoraFields').style.display = 'block';
+                        document.getElementById('pesquisadoraWorkState').value = data.pesquisadoraWorkState || '';
+                        document.getElementById('pesquisadoraRole').value = data.pesquisadoraRole || '';
+                    } else if (data.professionalRole === 'estudante_pos_graduacao') {
+                        document.getElementById('studentFields').style.display = 'block';
+                        document.getElementById('studentStudyState').value = data.studentStudyState || '';
+                        if (data.pgType) {
+                            document.getElementById('pg' + data.pgType.charAt(0).toUpperCase() + data.pgType.slice(1)).checked = true;
+                        }
+                        document.getElementById('pgArea').value = data.pgArea || '';
+                        document.getElementById('pgProgramName').value = data.pgProgramName || '';
+                    } else if (data.professionalRole === 'atuando_nao_pesquisadora') {
+                        document.getElementById('notResearcherFields').style.display = 'block';
+                        if (data.notResearcherReason) {
+                            document.getElementById(data.notResearcherReason.replace(/_/g, '').replace('nointerest', 'noInterestResearcher').replace('notable', 'notAbleResearcher').replace('prefernãoresponder', 'preferNotResearcher')).checked = true;
+                        }
+                    } else if (data.professionalRole === 'nao_atuando') {
+                        document.getElementById('notWorkingFields').style.display = 'block';
+                        if (data.notWorkingReason) {
+                             document.getElementById(data.notWorkingReason.replace(/_/g, '').replace('notlooking', 'notLookingJob').replace('cannotwork', 'cannotWork').replace('unemployed', 'unemployed').replace('retired', 'retired').replace('otherreasons', 'otherReasonsNotWorking').replace('prefernãoresponder', 'preferNotWorking')).checked = true;
+                        }
+                    }
+                }
+
+                // Preencher Dados Socioeconômicos
+                if (data.householdMembers) {
+                    document.getElementById('householdMembers').value = data.householdMembers;
+                }
+                if (data.hasChildren) {
+                    document.getElementById('hasChildren' + (data.hasChildren === 'sim' ? 'Yes' : data.hasChildren === 'nao' ? 'No' : 'PreferNot')).checked = true;
+                }
+                if (data.isCaregiver) {
+                    document.getElementById('isCaregiver' + (data.isCaregiver === 'sim' ? 'Yes' : data.isCaregiver === 'nao' ? 'No' : 'PreferNot')).checked = true;
+                }
+                if (data.economicActiveMembers) {
+                    document.getElementById('economicActiveMembers').value = data.economicActiveMembers;
+                }
+                if (data.familyIncome) {
+                    document.getElementById('familyIncome').value = data.familyIncome;
+                }
+                if (data.participateStem) {
+                    document.getElementById('participateStem' + (data.participateStem === 'sim' ? 'Yes' : 'No')).checked = true;
+                }
+                if (data.participateSocial) {
+                    document.getElementById('participateSocial' + (data.participateSocial === 'sim' ? 'Yes' : data.participateSocial === 'nao' ? 'No' : 'PreferNot')).checked = true;
+                }
+
+                if (data.challenges && Array.isArray(data.challenges)) {
+                    data.challenges.forEach(challenge => {
+                        const checkbox = document.getElementById('challenge' + challenge.charAt(0).toUpperCase() + challenge.slice(1));
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                
+                if (data.genderViolence && Array.isArray(data.genderViolence)) {
+                    data.genderViolence.forEach(violence => {
+                        const checkbox = document.getElementById('violence' + violence.charAt(0).toUpperCase() + violence.slice(1));
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+
+            } catch (error) {
+                console.error('Erro geral ao carregar dados:', error);
+                showMessage(error.message || 'Erro ao carregar os dados da pesquisadora.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

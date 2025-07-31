@@ -1,0 +1,932 @@
+/* ==========================================================================
+   Estilos Globais e Estrutura da Página (aplicam-se a todas as páginas)
+   ========================================================================== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #d8cce8; /* Light purple background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Certifique-se de que a imagem de fundo esteja na pasta correta ou o caminho esteja certo */
+    background-image: url('http://s3.amazonaws.com/appforest_uf/f1656101864088x997392586360712700/924bbea037cab4ba5cf0dfc468ae0a8f.png');
+    background-size: cover; /* Cobre todo o elemento */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem */
+    background-attachment: fixed; /* Imagem fixa no scroll */
+}
+
+/* Header Styles */
+.main-header {
+    background-color: #240447; /* Dark purple from the header */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    height: 150px; /* Adjust height based on the image */
+}
+
+.logo img {
+    height: 120px; /* Adjust the height of the logo as needed */
+    width: auto;
+}
+
+/* Main Content Wrapper for Layout */
+.content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px 0;
+    position: relative;
+    padding-left: 5%; /* Adiciona um padding lateral para o layout geral */
+    padding-right: 5%;
+    box-sizing: border-box;
+    width: 100%; /* Garante que o wrapper ocupe 100% da largura disponível */
+}
+
+.left-content {
+    flex-grow: 1; /* Permite que o conteúdo esquerdo cresça */
+    padding-right: 30px; /* Espaçamento entre o conteúdo esquerdo e o painel de login */
+    box-sizing: border-box;
+    max-width: calc(100% - 350px); /* 100% da largura do wrapper - (largura do painel + espaçamento) */
+}
+
+.right-sidebar {
+    flex: 1; /* Ocupa 1/3 do espaço disponível */
+    padding: 0;
+    display: flex; /* Usamos flex aqui para centralizar o formulário dentro da sidebar */
+    justify-content: center; /* Centraliza horizontalmente o formulário */
+    align-items: flex-start; /* Alinha o formulário no topo da sidebar */
+}
+
+/* Estilos de Botões Genéricos (Aplicam-se a vários botões se tiverem as mesmas classes) */
+.button-container {
+    text-align: left;
+    margin: 40px 0;
+}
+
+.btn-buscar-pesquisadoras,
+.btn-login { /* Estilos comuns para ambos os botões */
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #240447; /* Dark Violet */
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-buscar-pesquisadoras:hover,
+.btn-login:hover {
+    background-color: #240447; /* Dark Violet (mantido igual ao normal, se quiser um hover diferente, mude aqui) */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-buscar-pesquisadoras:active,
+.btn-login:active {
+    background-color: #4B0082; /* Indigo */
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para Mensagens de Sucesso/Erro (Genéricas) */
+.message {
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    display: none;
+    text-align: center;
+}
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Rodapé */
+.main-footer {
+    background-color: #3b0066; /* Dark purple */
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: auto; /* Empurra o rodapé para o final */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-footer p {
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #bbb;
+}
+
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #d8cce8;
+    text-decoration: underline;
+}
+
+.footer-links .separator {
+    color: #888;
+    margin: 0 5px;
+}
+
+.social-media {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    font-size: 2em;
+}
+
+.social-media img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ==========================================================================
+   Estilos Específicos da Página Inicial (ou onde o conteúdo principal está)
+   ========================================================================== */
+
+/* Title Section (BANCO DE PESQUISADORAS) */
+.title-section {
+    background-color: #240447;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    width: fit-content;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.title-section h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* Main Text Block (BANCO DE PESQUISADORAS DA REDE...) */
+.main-text-block {
+    color: #240447;
+    font-size: 1.2em;
+    text-align: justify;
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: 20px; /* Mantém o espaçamento da esquerda */
+    margin-right: auto; /* Permite centralização se a largura for menor */
+}
+
+.main-text-block h2 {
+    color: #240447;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.texto-left-italico {
+    text-align: justify;
+    font-style: italic;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    color: #240447;
+    font-size: 1.1em;
+}
+
+/* Estilos para o bloco de 3 colunas */
+.three-column-text {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.column-item {
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 280px;
+    margin-bottom: 20px;
+}
+
+.three-column-text .column-item:nth-child(1),
+.three-column-text .column-item:nth-child(2),
+.three-column-text .column-item:nth-child(3) {
+    background-color: #E6E6FA;
+    border: 1px solid #800080;
+}
+
+.column-item h3 {
+    color: #333;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.column-item p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Seção de Pesquisa */
+.search-section {
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    flex: 1;
+    min-width: 50px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-color); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+}
+
+.input-group input[type="text"],
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #E6E6FA;
+    box-sizing: border-box;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: var(--input-bg); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+}
+
+.search-input-wrapper input {
+    border: none;
+    flex-grow: 1;
+    padding: 12px 15px;
+    background-color: transparent;
+}
+
+.search-input-wrapper input:focus {
+    outline: none;
+}
+
+.search-button {
+    background-color: var(--primary-purple); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    color: var(--white); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    background-color: #5a099a;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilos da tabela */
+.tabela-pesquisadoras {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #111111;
+}
+
+.tabela-pesquisadoras th,
+.tabela-pesquisadoras td {
+    border: 1px solid #111111;
+    padding: 20px;
+    text-align: left;
+}
+
+.tabela-pesquisadoras th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.tabela-pesquisadoras tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabela-pesquisadoras tr:hover {
+    background-color: #f1f1f1;
+}
+
+.tabela-pesquisadoras a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.tabela-pesquisadoras a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Estilos do Formulário de Login (com classe .login-form no <form>)
+   ========================================================================== */
+.login-card { /* Esta classe deve ser aplicada ao elemento pai do formulário, ou diretamente ao <form> */
+    background-color: #b585c7;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 70%; /* Ajuste percentual da largura do container pai */
+    max-width: 400px; /* Limite a largura do card de login para que não fique muito largo */
+    text-align: center;
+    /* Se o login-card for o próprio formulário, use margin: auto para centralizar */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-card h2 {
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.login-card .form-group { /* Usa a classe original .form-group dentro do login-card */
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.login-card .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #3b0066;
+    font-weight: bold;
+}
+
+.login-card .form-group input {
+    width: calc(100% - 20px); /* 100% da largura menos o padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+}
+
+.login-card button { /* Botões dentro do login-card */
+    width: 100%;
+    padding: 12px;
+    background-color: #240447; /* Cor para o botão Entrar */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.login-card button:hover {
+    background-color: #3b0066; /* Cor de hover para Entrar */
+}
+
+.login-card button#registerBtn {
+    background-color: #a728a7; /* Cor que você definiu para o Cadastrar */
+}
+
+.login-card button#registerBtn:hover {
+    background-color: #8c1e8c; /* Uma cor mais escura para o hover de Cadastrar */
+}
+
+#message { /* ID do elemento de mensagem dentro do formulário */
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: none; /* Escondido por padrão, será exibido via JS */
+}
+/* Estilos para #message.success e #message.error já estão no bloco de mensagens genéricas */
+
+
+/* ==========================================================================
+   Estilos do Formulário de Cadastro (com classe .register-form no <form>)
+   ========================================================================== */
+.register-form { /* Assumindo que o <form> de cadastro terá a classe 'register-form' */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 800px; /* Largura maior para o formulário de cadastro */
+    width: 100%; /* Garante que ele use 100% da largura disponível até max-width */
+    margin: 20px auto; /* Isso centraliza o bloco horizontalmente */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaçamento entre os fieldsets/form-group2 */
+}
+
+.register-form fieldset { /* Aplica-se a fieldsets DENTRO de .register-form */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    flex: 1 1 100%; /* Fieldsets ocupam a largura total */
+}
+
+.register-form legend { /* Aplica-se a legend DENTRO de .register-form */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0056b3;
+    padding: 0 10px;
+}
+
+.register-form .form-group2 { /* Seletor para form-group2 DENTRO de register-form */
+    margin-bottom: 15px;
+    flex: 1 1 48%; /* Para layout de duas colunas */
+}
+.register-form .form-group2 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.register-form .form-group2 input[type="text"],
+.register-form .form-group2 input[type="email"],
+.register-form .form-group2 input[type="tel"],
+.register-form .form-group2 input[type="date"],
+.register-form .form-group2 input[type="password"],
+.register-form .form-group2 select,
+.register-form .form-group2 textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.register-form .form-group2 input[type="radio"],
+.register-form .form-group2 input[type="checkbox"] {
+    margin-right: 8px;
+}
+.register-form .form-group2 .radio-group label,
+.register-form .form-group2 .checkbox-group label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+.register-form .conditional-fields {
+    border-left: 3px solid #007bff;
+    padding-left: 10px;
+    margin-top: 10px;
+    display: none; /* Controlado por JS */
+}
+.register-form .add-item-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.register-form .add-item-container input { flex-grow: 1; }
+.register-form .add-item-container button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.register-form .add-item-container button:hover { background-color: #218838; }
+.register-form .added-items { margin-top: 10px; }
+.register-form .added-item {
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.register-form .added-item button {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.register-form .form-checkbox-group label { /* Estilo específico para checkbox groups DENTRO do formulário de cadastro */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.register-form .form-checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Botão de submit do formulário de Cadastro */
+.register-form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.register-form button[type="submit"]:hover { background-color: #0056b3; }
+
+
+/* ==========================================================================
+   Media Queries para Responsividade
+   ========================================================================== */
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .left-content {
+        max-width: 100%;
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .title-section {
+        margin: 20px auto;
+    }
+
+    .main-text-block {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Ajuste para o painel de login em telas menores */
+    .right-sidebar {
+        width: 90%;
+        max-width: 400px;
+        margin: 30px auto; /* Centraliza o painel de login abaixo do conteúdo principal */
+        position: static; /* Remove posicionamento absoluto se houver */
+        top: auto;
+        right: auto;
+    }
+
+    /* Três colunas em telas médias (ajustado para flexbox) */
+    .three-column-text {
+        flex-direction: column; /* Empilha as colunas em telas menores */
+        align-items: center;
+        padding: 0 20px;
+        max-width: 100%;
+    }
+
+    .column-item {
+        width: 90%; /* Ocupa mais largura em telas menores */
+        min-width: unset; /* Remove min-width se estiver causando problemas */
+    }
+
+    /* Formulário de cadastro (register-form) em telas menores */
+    .register-form {
+        max-width: 100%; /* Ocupa a largura total disponível */
+        padding: 20px; /* Ajusta o padding para telas menores */
+        gap: 15px; /* Ajusta o gap */
+    }
+
+    .register-form .form-group2 {
+        flex: 1 1 100%; /* Cada campo ocupa uma linha completa */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        height: auto;
+        padding: 15px;
+    }
+
+    .logo img {
+        height: 100px;
+    }
+
+    .title-section h1 {
+        font-size: 1.5em;
+    }
+
+    .main-text-block h2 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 20px;
+    }
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    .footer-links a {
+        margin: 5px 0;
+    }
+    .footer-links .separator {
+        display: none;
+    }
+}
+
+
+/* --- Seu CSS Existente para o formulário e grupos de campos --- */
+
+.form2 {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px; /* Tamanho base para todo o formulário */
+}
+
+.form-group2 {
+    margin-bottom: 25px;
+}
+
+.form-group2 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.form-group2 input[type="text"],
+.form-group2 input[type="email"],
+.form-group2 input[type="tel"],
+.form-group2 input[type="date"],
+.form-group2 input[type="url"],
+.form-group2 select,
+.form-group2 textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.radio-group label,
+.checkbox-group label {
+    margin-left: 5px;
+    margin-right: 15px;
+    display: inline-block;
+    font-size: 1em;
+}
+
+.conditional-fields {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px dashed #eee;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin-bottom: 25px;
+}
+
+.form-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.form-section .form-group2:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Media Queries para responsividade --- */
+
+/* Telas menores que 768px (tablets e celulares) */
+@media (max-width: 768px) {
+    .form2 {
+        padding: 15px; /* Reduz o padding interno do formulário */
+        margin: 15px auto; /* Reduz a margem externa */
+        font-size: 15px; /* Reduz um pouco a fonte base para telas menores */
+    }
+
+    .form-group2 {
+        margin-bottom: 20px; /* Ajusta o espaço entre perguntas em telas menores */
+    }
+
+    .form-group2 label {
+        font-size: 1em; /* Ajusta a fonte dos rótulos para o tamanho base */
+    }
+
+    .form-group2 input[type="text"],
+    .form-group2 input[type="email"],
+    .form-group2 input[type="tel"],
+    .form-group2 input[type="date"],
+    .form-group2 input[type="url"],
+    .form-group2 select,
+    .form-group2 textarea {
+        padding: 8px; /* Reduz o padding dos campos de entrada */
+        font-size: 0.95em; /* Reduz um pouco a fonte dos campos */
+    }
+
+    .form-section {
+        margin-bottom: 30px; /* Reduz o espaço entre seções grandes */
+        padding: 15px; /* Reduz o padding interno da seção */
+    }
+}
+
+/* Seu CSS Existente */
+
+.form2 {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px; /* Tamanho base para todo o formulário */
+}
+
+.form-group2 {
+    margin-bottom: 25px;
+}
+
+.form-group2 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.form-group2 input[type="text"],
+.form-group2 input[type="email"],
+.form-group2 input[type="tel"],
+.form-group2 input[type="date"],
+.form-group2 input[type="url"],
+.form-group2 select,
+.form-group2 textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.radio-group label,
+.checkbox-group label {
+    margin-left: 5px;
+    margin-right: 15px;
+    display: inline-block;
+    font-size: 1em;
+}
+
+.conditional-fields {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px dashed #eee;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin-bottom: 25px;
+}
+
+.form-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+/* --- AQUI: Estiliza os títulos das seções dentro de .form-section --- */
+.form-section h2 {
+    font-size: 1.8em; /* Ajuste este valor (ex: 24px, 1.8em) */
+    color: #0056b3; /* Cor para destacar o título */
+    margin-top: 0; /* Remove margem superior padrão do h2 */
+    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+    text-align: center; /* Centraliza o título, se desejar */
+}
+
+.form-section .form-group2:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Media Queries para responsividade (já existentes) --- */
+@media (max-width: 768px) {
+    .form2 {
+        padding: 15px;
+        margin: 15px auto;
+        font-size: 15px;
+    }
+    .form-group2 {
+        margin-bottom: 20px;
+    }
+    .form-group2 label {
+        font-size: 1em;
+    }
+    .form-group2 input[type="text"],
+    /* ... outros inputs ... */
+    .form-group2 textarea {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+    .form-section {
+        margin-bottom: 30px;
+        padding: 15px;
+    }
+    /* --- AQUI: Ajusta o título da seção em telas menores --- */
+    .form-section h2 {
+        font-size: 1.8em; /* Reduz um pouco em telas menores */
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form2 {
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+        font-size: 14px;
+    }
+    .form-group2 {
+        margin-bottom: 18px;
+    }
+    .form-group2 label {
+        font-size: 1em;
+    }
+    .form-group2 input[type="text"],
+    /* ... outros inputs ... */
+    .form-group2 textarea {
+        padding: 6px;
+        font-size: 1.2em;
+    }
+    .form-section {
+        margin-bottom: 25px;
+        padding: 10px;
+    }
+    /* --- AQUI: Ajusta ainda mais o título em telas muito pequenas --- */
+    .form-section h2 {
+        font-size: 1.3em; /* Mais uma redução */
+        margin-bottom: 10px;
+    }
+    .radio-group,
+    .checkbox-group {
+        display: block;
+        margin-bottom: 10px;
+    }
+}

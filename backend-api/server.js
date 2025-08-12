@@ -11,7 +11,7 @@ const path = require('path');           // Mantido, mas não usado diretame
 
 // Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
-
+app.use(express.static(path.join(__dirname, 'frontend-app')));
 const app = express();
 const PORT = process.env.PORT || 3000; // Porta do servidor
 

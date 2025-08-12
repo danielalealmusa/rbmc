@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/front-end/css/styles.css"> 
+    
+</head>
+
+
+<header class="main-header">
+    <div class="logo">
+        <a href="index.html">
+            <img src="img\marcabranca-RBMC.png" alt="Rede Brasileira Mulheres Cientistas Logo">
+        </a>
+    </div>
+</header>
+
+<body class="pagina-especial-body">
+  <div class="container">
+    <div class="titulo-container">
+      Quero me cadastrar como: <span class="help-icon"></span>
+    </div>
+    <button class="button" id="btn-cadastrar-pesquisadora">
+    Pesquisadora/Cientista
+  </button>
+  <button class="button" id="btn-cadastrar-colaboradora">
+    Colaboradora
+  </button>
+  <button class="button" id="btn-cadastrar-apoiador">
+    Apoiador(a)
+  </button>
+</div>
+ <script>
+   document.getElementById("btn-cadastrar-pesquisadora").addEventListener("click", function() {
+       window.location.href = "pesquisadora.html";
+   });
+   document.getElementById("btn-cadastrar-colaboradora").addEventListener("click", function() {
+       window.location.href = "colaboradora.html";
+   });
+   document.getElementById("btn-cadastrar-apoiador").addEventListener("click", function() {
+       window.location.href = "apoiadora.html";
+   });
+</script>
+</body>
+
+
+ <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Rede Brasileira Mulheres Cientistas. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    </html>

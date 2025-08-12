@@ -1,35 +1,82 @@
 /* ==========================================================================
+   Variáveis CSS (Custom Properties)
+   Defina suas cores e valores comuns aqui para fácil manutenção
+   ========================================================================== */
+:root {
+    /* Cores Principais */
+    --color-primary-dark-purple: #240447;
+    --color-secondary-dark-purple: #3b0066;
+    --color-container: #b585c7;
+    --color-light-purple-bg: #d8cce8;
+    --color-light-gray-bg: #f8fafc; /* Usado no body da página LGPD e em alguns forms */
+    --color-login-card-bg: #b585c7;
+    --color-register-btn: #a728a7;
+    --color-register-btn-hover: #8c1e8c;
+    --color-column-item-bg: #E6E6FA;
+    --color-column-item-border: #800080;
+    --color-link-blue: #007bff; /* Usado para links e alguns botões de submit */
+    --color-link-blue-hover: #0056b3;
+    --color-add-btn: #28a745;
+    --color-add-btn-hover: #218838;
+    --color-remove-btn: #dc3545;
+    --color-added-item-bg: #e9ecef;
+    --color-text-dark: #1e293b; /* Títulos, header */
+    --color-text-medium: #334155; /* Texto padrão LGPD */
+    --color-text-light: #475569; /* Labels de formulário */
+    --color-white: #ffffff;
+    --color-gray-border: #e2e8f0; /* Bordas e divisores */
+    --color-input-border: #cbd5e1;
+    --color-input-disabled-bg: #e2e8f0;
+    --color-button-disabled-bg: #9ca3af;
+
+    /* Cores de Mensagens */
+    --color-success-bg: #d1fae5;
+    --color-success-text: #065f46;
+    --color-error-bg: #fee2e2;
+    --color-error-text: #dc2626;
+
+    /* Sombras */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 6px 10px rgba(0, 0, 0, 0.15);
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 0.75rem; /* 12px */
+}
+
+/* ==========================================================================
    Estilos Globais e Estrutura da Página (aplicam-se a todas as páginas)
    ========================================================================== */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #d8cce8; /* Light purple background */
+    font-family: 'Arial', sans-serif; /* Usando Arial como fallback, mas Inter é preferencial */
+    background-color: var(--color-light-purple-bg);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* Certifique-se de que a imagem de fundo esteja na pasta correta ou o caminho esteja certo */
     background-image: url('http://s3.amazonaws.com/appforest_uf/f1656101864088x997392586360712700/924bbea037cab4ba5cf0dfc468ae0a8f.png');
-    background-size: cover; /* Cobre todo o elemento */
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Não repete a imagem */
-    background-attachment: fixed; /* Imagem fixa no scroll */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* Header Styles */
 .main-header {
-    background-color: #240447; /* Dark purple from the header */
+    background-color: var(--color-primary-dark-purple);
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
     box-sizing: border-box;
-    height: 150px; /* Adjust height based on the image */
+    height: 150px;
 }
 
 .logo img {
-    height: 120px; /* Adjust the height of the logo as needed */
+    height: 120px;
     width: auto;
 }
 
@@ -37,37 +84,35 @@ body {
 .content-wrapper {
     display: flex;
     flex-grow: 1;
-    padding: 20px 0;
+    padding: 20px 5%; /* Consolidado padding-left/right */
     position: relative;
-    padding-left: 5%; /* Adiciona um padding lateral para o layout geral */
-    padding-right: 5%;
     box-sizing: border-box;
-    width: 100%; /* Garante que o wrapper ocupe 100% da largura disponível */
+    width: 100%;
 }
 
 .left-content {
-    flex-grow: 1; /* Permite que o conteúdo esquerdo cresça */
-    padding-right: 30px; /* Espaçamento entre o conteúdo esquerdo e o painel de login */
+    flex-grow: 1;
+    padding-right: 30px;
     box-sizing: border-box;
-    max-width: calc(100% - 350px); /* 100% da largura do wrapper - (largura do painel + espaçamento) */
+    max-width: calc(100% - 350px);
 }
 
 .right-sidebar {
-    flex: 1; /* Ocupa 1/3 do espaço disponível */
+    flex: 1;
     padding: 0;
-    display: flex; /* Usamos flex aqui para centralizar o formulário dentro da sidebar */
-    justify-content: center; /* Centraliza horizontalmente o formulário */
-    align-items: flex-start; /* Alinha o formulário no topo da sidebar */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-/* Estilos de Botões Genéricos (Aplicam-se a vários botões se tiverem as mesmas classes) */
+/* Estilos de Botões Genéricos */
+
 .button-container {
-    text-align: left;
-    margin: 40px 0;
+    display: flex;
+    justify-content: left; 
+    width: 100%; /* Garante que o contêiner ocupe toda a largura */
 }
-
-.btn-buscar-pesquisadoras,
-.btn-login { /* Estilos comuns para ambos os botões */
+.btn-base { /* Nova classe base para botões */
     display: inline-block;
     padding: 15px 30px;
     background-color: #240447; /* Dark Violet */
@@ -80,48 +125,58 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     margin-bottom: 20px;
 }
 
-.btn-buscar-pesquisadoras:hover,
-.btn-login:hover {
-    background-color: #240447; /* Dark Violet (mantido igual ao normal, se quiser um hover diferente, mude aqui) */
+.btn-base:hover {
+    background-color: var(--color-secondary-dark-purple); /* Um hover mais escuro */
     transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-lg);
 }
 
-.btn-buscar-pesquisadoras:active,
-.btn-login:active {
-    background-color: #4B0082; /* Indigo */
+.btn-base:active {
+    background-color: var(--color-secondary-dark-purple);
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
+}
+
+
+
+.titulo-container {
+    font-size: 1.2em;
+    font-weight: bold; 
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: var(--color-primary-dark-purple);
 }
 
 /* Estilos para Mensagens de Sucesso/Erro (Genéricas) */
 .message {
     padding: 10px;
     margin-top: 15px;
-    border-radius: 5px;
-    display: none;
+    border-radius: var(--radius-sm);
+    display: none; /* Controlado por JS */
     text-align: center;
 }
 .message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: var(--color-success-bg);
+    color: var(--color-success-text);
+    border: 1px solid var(--color-success-bg); /* Use a mesma cor para a borda */
 }
 .message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: var(--color-error-bg);
+    color: var(--color-error-text);
+    border: 1px solid var(--color-error-bg); /* Use a mesma cor para a borda */
 }
 
 /* Rodapé */
 .main-footer {
-    background-color: #3b0066; /* Dark purple */
-    color: white;
+    background-color: var(--color-secondary-dark-purple);
+    color: var(--color-white);
     padding: 30px 20px;
     text-align: center;
-    margin-top: auto; /* Empurra o rodapé para o final */
+    margin-top: auto;
     width: 100%;
     box-sizing: border-box;
 }
@@ -137,7 +192,7 @@ body {
 .main-footer p {
     margin-bottom: 15px;
     font-size: 0.9em;
-    color: #bbb;
+    color: #bbb; /* Mantido fixo para contraste */
 }
 
 .footer-links {
@@ -145,7 +200,7 @@ body {
 }
 
 .footer-links a {
-    color: white;
+    color: var(--color-white);
     text-decoration: none;
     font-size: 0.95em;
     margin: 0 10px;
@@ -153,12 +208,12 @@ body {
 }
 
 .footer-links a:hover {
-    color: #d8cce8;
+    color: var(--color-light-purple-bg); /* Cor de hover do rodapé */
     text-decoration: underline;
 }
 
 .footer-links .separator {
-    color: #888;
+    color: #888; /* Mantido fixo */
     margin: 0 5px;
 }
 
@@ -180,15 +235,15 @@ body {
 
 /* Title Section (BANCO DE PESQUISADORAS) */
 .title-section {
-    background-color: #240447;
-    color: white;
+    background-color: var(--color-primary-dark-purple);
+    color: var(--color-white);
     padding: 15px 30px;
     text-align: center;
     width: fit-content;
     margin-top: 40px;
     margin-bottom: 50px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-sm);
     display: inline-block;
 }
 
@@ -202,17 +257,17 @@ body {
 
 /* Main Text Block (BANCO DE PESQUISADORAS DA REDE...) */
 .main-text-block {
-    color: #240447;
+    color: var(--color-primary-dark-purple);
     font-size: 1.2em;
     text-align: justify;
     margin-top: 20px;
     max-width: 800px;
-    margin-left: 20px; /* Mantém o espaçamento da esquerda */
-    margin-right: auto; /* Permite centralização se a largura for menor */
+    margin-left: 20px;
+    margin-right: auto;
 }
 
 .main-text-block h2 {
-    color: #240447;
+    color: var(--color-primary-dark-purple);
     font-size: 1.5em;
     margin-bottom: 15px;
     line-height: 1.3;
@@ -223,7 +278,7 @@ body {
     font-style: italic;
     margin-left: 60px;
     margin-bottom: 20px;
-    color: #240447;
+    color: var(--color-primary-dark-purple);
     font-size: 1.1em;
 }
 
@@ -238,8 +293,8 @@ body {
 .column-item {
     flex: 1;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
     min-width: 280px;
     margin-bottom: 20px;
 }
@@ -247,19 +302,19 @@ body {
 .three-column-text .column-item:nth-child(1),
 .three-column-text .column-item:nth-child(2),
 .three-column-text .column-item:nth-child(3) {
-    background-color: #E6E6FA;
-    border: 1px solid #800080;
+    background-color: var(--color-column-item-bg);
+    border: 1px solid var(--color-column-item-border);
 }
 
 .column-item h3 {
-    color: #333;
+    color: #333; /* Mantido fixo */
     margin-top: 0;
     text-align: center;
     margin-bottom: 15px;
 }
 
 .column-item p {
-    color: #555;
+    color: #555; /* Mantido fixo */
     line-height: 1.6;
 }
 
@@ -270,35 +325,34 @@ body {
 
 .input-group {
     margin-bottom: 20px;
-    flex: 1;
-    min-width: 50px;
+    width: 70%; /* Garante que o campo ocupe toda a largura disponível */
 }
 
 .input-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: var(--text-color); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    color: var(--color-text-light); /* Usando variável */
 }
 
 .input-group input[type="text"],
 .input-group select {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid var(--border-color); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
-    border-radius: 5px;
+    border: 1px solid var(--color-input-border); /* Usando variável */
+    border-radius: var(--radius-sm);
     font-size: 1em;
-    background-color: #E6E6FA;
+    background-color: var(--color-column-item-bg); /* Usando variável */
     box-sizing: border-box;
 }
 
 .search-input-wrapper {
     display: flex;
     align-items: center;
-    border: 1px solid var(--border-color); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
-    border-radius: 5px;
+    border: 1px solid var(--color-input-border); /* Usando variável */
+    border-radius: var(--radius-sm);
     overflow: hidden;
-    background-color: var(--input-bg); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    background-color: var(--color-column-item-bg); /* Usando variável */
 }
 
 .search-input-wrapper input {
@@ -311,23 +365,34 @@ body {
 .search-input-wrapper input:focus {
     outline: none;
 }
+.search-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Isso centraliza todos os itens, incluindo o contêiner do botão */
+    gap: 20px;
+}
+
+.search-button-container {
+    display: flex;
+    align-items: center; /* Alinha o botão verticalmente com outros campos */
+}
 
 .search-button {
-    background-color: var(--primary-purple); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
-    color: var(--white); /* Certifique-se que estas variáveis CSS estão definidas em algum lugar */
+    background-color: var(--color-primary-dark-purple); /* Usando variável */
+    color: var(--color-white); /* Usando variável */
     border: none;
     padding: 12px 20px;
     cursor: pointer;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .search-button:hover {
-    background-color: #5a099a;
+    background-color: var(--color-secondary-dark-purple); /* Usando variável */
 }
 
 .full-width {
@@ -346,31 +411,31 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    border: 1px solid #111111;
+    border: 1px solid #111111; /* Mantido fixo */
 }
 
 .tabela-pesquisadoras th,
 .tabela-pesquisadoras td {
-    border: 1px solid #111111;
+    border: 1px solid #111111; /* Mantido fixo */
     padding: 20px;
     text-align: left;
 }
 
 .tabela-pesquisadoras th {
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; /* Mantido fixo */
     font-weight: bold;
 }
 
 .tabela-pesquisadoras tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Mantido fixo */
 }
 
 .tabela-pesquisadoras tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f1f1f1; /* Mantido fixo */
 }
 
 .tabela-pesquisadoras a {
-    color: #007bff;
+    color: var(--color-link-blue); /* Usando variável */
     text-decoration: none;
 }
 
@@ -382,20 +447,19 @@ body {
    Estilos do Formulário de Login (com classe .login-form no <form>)
    ========================================================================== */
 .login-card { /* Esta classe deve ser aplicada ao elemento pai do formulário, ou diretamente ao <form> */
-    background-color: #b585c7;
+    background-color: var(--color-login-card-bg);
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 70%; /* Ajuste percentual da largura do container pai */
-    max-width: 400px; /* Limite a largura do card de login para que não fique muito largo */
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    width: 70%;
+    max-width: 400px;
     text-align: center;
-    /* Se o login-card for o próprio formulário, use margin: auto para centralizar */
     margin-left: auto;
     margin-right: auto;
 }
 
 .login-card h2 {
-    color: #333;
+    color: #333; /* Mantido fixo */
     margin-bottom: 25px;
 }
 
@@ -407,26 +471,26 @@ body {
 .login-card .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #3b0066;
+    color: var(--color-secondary-dark-purple);
     font-weight: bold;
 }
 
 .login-card .form-group input {
-    width: calc(100% - 20px); /* 100% da largura menos o padding */
+    width: calc(100% - 20px);
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #ddd; /* Mantido fixo */
+    border-radius: var(--radius-sm);
     font-size: 16px;
-    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    box-sizing: border-box;
 }
 
 .login-card button { /* Botões dentro do login-card */
     width: 100%;
     padding: 12px;
-    background-color: #240447; /* Cor para o botão Entrar */
-    color: white;
+    background-color: var(--color-primary-dark-purple);
+    color: var(--color-white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -434,21 +498,21 @@ body {
 }
 
 .login-card button:hover {
-    background-color: #3b0066; /* Cor de hover para Entrar */
+    background-color: var(--color-secondary-dark-purple);
 }
 
 .login-card button#registerBtn {
-    background-color: #a728a7; /* Cor que você definiu para o Cadastrar */
+    background-color: var(--color-register-btn);
 }
 
 .login-card button#registerBtn:hover {
-    background-color: #8c1e8c; /* Uma cor mais escura para o hover de Cadastrar */
+    background-color: var(--color-register-btn-hover);
 }
 
 #message { /* ID do elemento de mensagem dentro do formulário */
     margin-top: 20px;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-weight: bold;
     display: none; /* Escondido por padrão, será exibido via JS */
 }
@@ -456,132 +520,262 @@ body {
 
 
 /* ==========================================================================
-   Estilos do Formulário de Cadastro (com classe .register-form no <form>)
+   Estilos do Formulário de Cadastro (com classe .form2)
+   Unificado com estilos de .register-form
    ========================================================================== */
-.register-form { /* Assumindo que o <form> de cadastro terá a classe 'register-form' */
-    background-color: #fff;
+.form2 { /* Esta classe agora engloba os estilos do .register-form */
+    background-color: var(--color-white);
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    max-width: 800px; /* Largura maior para o formulário de cadastro */
-    width: 100%; /* Garante que ele use 100% da largura disponível até max-width */
-    margin: 20px auto; /* Isso centraliza o bloco horizontalmente */
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Espaçamento entre os fieldsets/form-group2 */
+    gap: 20px;
+    font-size: 16px; /* Tamanho base para todo o formulário */
 }
 
-.register-form fieldset { /* Aplica-se a fieldsets DENTRO de .register-form */
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.form2 fieldset { /* Aplica-se a fieldsets DENTRO de .form2 */
+    border: 1px solid var(--color-gray-border);
+    border-radius: var(--radius-sm);
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Mantido para espaçamento entre fieldsets */
     flex: 1 1 100%; /* Fieldsets ocupam a largura total */
 }
 
-.register-form legend { /* Aplica-se a legend DENTRO de .register-form */
+.form2 legend { /* Aplica-se a legend DENTRO de .form2 */
     font-size: 1.2em;
     font-weight: bold;
-    color: #0056b3;
+    color: var(--color-link-blue-hover); /* Usando variável */
     padding: 0 10px;
 }
 
-.register-form .form-group2 { /* Seletor para form-group2 DENTRO de register-form */
+.form-group2 { /* Seletor para form-group2 DENTRO de .form2 */
     margin-bottom: 15px;
-    flex: 1 1 48%; /* Para layout de duas colunas */
+    flex: 1 1 48%; /* Para layout de duas colunas (em telas maiores) */
 }
-.register-form .form-group2 label {
+.form-group2 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333; /* Mantido fixo */
+    font-size: 1.1em;
 }
-.register-form .form-group2 input[type="text"],
-.register-form .form-group2 input[type="email"],
-.register-form .form-group2 input[type="tel"],
-.register-form .form-group2 input[type="date"],
-.register-form .form-group2 input[type="password"],
-.register-form .form-group2 select,
-.register-form .form-group2 textarea {
-    width: calc(100% - 22px);
+.form-group2 input[type="text"],
+.form-group2 input[type="email"],
+.form-group2 input[type="tel"],
+.form-group2 input[type="date"],
+.form-group2 input[type="password"],
+.form-group2 input[type="url"], /* Adicionado para o campo Lattes e Publicações */
+.form-group2 select,
+.form-group2 textarea {
+    width: calc(100% - 22px); /* Ajuste para padding */
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #ccc; /* Mantido fixo */
+    border-radius: var(--radius-sm);
     box-sizing: border-box;
+    font-size: 1em;
 }
-.register-form .form-group2 input[type="radio"],
-.register-form .form-group2 input[type="checkbox"] {
+.radio-group input[type="radio"],
+.checkbox-group input[type="checkbox"] {
     margin-right: 8px;
 }
-.register-form .form-group2 .radio-group label,
-.register-form .form-group2 .checkbox-group label {
-    display: inline-block;
+.radio-group label,
+.checkbox-group label {
+    margin-left: 5px; /* Ajustado para 5px */
     margin-right: 15px;
-    font-weight: normal;
+    display: inline-block;
+    font-weight: normal; /* Removido bold para labels de radio/checkbox */
+    font-size: 1em; /* Unificado */
 }
 
-.register-form .conditional-fields {
-    border-left: 3px solid #007bff;
+.conditional-fields {
+    border-left: 3px solid var(--color-link-blue); /* Usando variável */
     padding-left: 10px;
     margin-top: 10px;
     display: none; /* Controlado por JS */
+    margin-bottom: 25px; /* Mantido para espaçamento */
+    padding: 10px; /* Mantido para padding */
+    border: 1px dashed #eee; /* Mantido fixo */
+    background-color: #f9f9f9; /* Mantido fixo */
+    border-radius: var(--radius-sm); /* Usando variável */
+    font-size: 0.95em; /* Mantido fixo */
 }
-.register-form .add-item-container {
+.add-item-container {
     display: flex;
     gap: 10px;
     align-items: center;
     margin-bottom: 10px;
 }
-.register-form .add-item-container input { flex-grow: 1; }
-.register-form .add-item-container button {
+.add-item-container input { flex-grow: 1; }
+.add-item-container button {
     padding: 8px 12px;
-    background-color: #28a745;
-    color: white;
+    background-color: var(--color-add-btn);
+    color: var(--color-white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-.register-form .add-item-container button:hover { background-color: #218838; }
-.register-form .added-items { margin-top: 10px; }
-.register-form .added-item {
-    background-color: #e9ecef;
+.add-item-container button:hover { background-color: var(--color-add-btn-hover); }
+.added-items { margin-top: 10px; }
+.added-item {
+    background-color: var(--color-added-item-bg);
     padding: 5px 10px;
-    border-radius: 3px;
+    border-radius: 3px; /* Mantido fixo */
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.register-form .added-item button {
-    background-color: #dc3545;
+.added-item button {
+    background-color: var(--color-remove-btn);
     border: none;
-    color: white;
+    color: var(--color-white);
     padding: 3px 8px;
-    border-radius: 3px;
+    border-radius: 3px; /* Mantido fixo */
     cursor: pointer;
 }
-.register-form .form-checkbox-group label { /* Estilo específico para checkbox groups DENTRO do formulário de cadastro */
+.form-checkbox-group label { /* Estilo específico para checkbox groups DENTRO do formulário de cadastro */
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
-.register-form .form-checkbox-group input[type="checkbox"] {
+.form-checkbox-group input[type="checkbox"] {
     margin-right: 10px;
 }
 
 /* Botão de submit do formulário de Cadastro */
-.register-form button[type="submit"] {
+.form2 button[type="submit"] { /* Agora seleciona o botão de submit dentro de .form2 */
     width: 100%;
     padding: 15px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--color-link-blue);
+    color: var(--color-white);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     font-size: 1.1em;
     cursor: pointer;
     margin-top: 20px;
 }
-.register-form button[type="submit"]:hover { background-color: #0056b3; }
+.form2 button[type="submit"]:hover { background-color: var(--color-link-blue-hover); }
 
+
+/* Estilo para campos desabilitados (unificado) */
+.form-group2 input:disabled,
+.form-group2 select:disabled,
+.form-group2 textarea:disabled,
+.radio-group input[type="radio"]:disabled + label,
+.checkbox-group input[type="checkbox"]:disabled + label,
+.add-item-container input:disabled,
+.add-item-container button:disabled,
+.form2 button[type="submit"]:disabled { /* Adicionado o botão de submit desabilitado */
+    background-color: var(--color-input-disabled-bg);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.radio-group input[type="radio"]:disabled,
+.checkbox-group input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+}
+
+
+/* ==========================================================================
+   Estilos para a Página de Termo de Consentimento (lgpd-consent.html)
+   ========================================================================== */
+.container_termo {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+.container_termo h1, .container_termo h2, .container_termo h3 {
+    color: var(--color-text-dark);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.container_termo h1 {
+    font-size: 2.0rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-gray-border);
+    padding-bottom: 1rem;
+}
+.container_termo h2 {
+    font-size: 1.75rem;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid var(--color-gray-border);
+    padding-bottom: 0.5rem;
+}
+.container_termo h3 {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+.container_termo p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+.container_termo ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+.container_termo ul li {
+    margin-bottom: 0.5rem;
+}
+.container_termo a {
+    color: var(--color-link-blue);
+    text-decoration: none;
+}
+.container_termo a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   Estilos para o container genérico e botão genérico (se usados em outras páginas)
+   ========================================================================== */
+.container { /* Usado em algum lugar como um container genérico */
+    background-color: var(--color-container); /* Corrigido para variável */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    margin: 20px auto;
+}
+.button { /* Usado em algum lugar como um botão genérico */
+      background-color: var(--color-white);
+    color: #6a1a7a; /* Mantido fixo, pois não está em variáveis */
+    border: none;
+    padding: 15px 20px;
+    margin: 10px 0 10px 50px; /* Margem superior e inferior de 10px, e uma margem esquerda de 20px */
+    max-width: 300px; /* Define a largura máxima para o botão */
+    display: block; /* Garante que a margem automática funcione corretamente */
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+.button:hover {
+    background-color: #f0f0f0; /* Mantido fixo */
+}
+
+.search-box {
+    /* Define o tamanho e o espaçamento da caixa */
+    max-width: 800px; /* Largura máxima para a caixa */
+    margin: 40px auto; /* Centraliza a caixa horizontalmente e adiciona margem superior/inferior */
+    padding: 30px; /* Espaçamento interno */
+    width: 90%;
+    text-align: center;
+    /* Estilização visual da caixa */
+    background-color: #ffffff; /* Fundo branco para a caixa */
+    border: 1px solid #e0e0e0; /* Borda cinza clara */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidade */
+}
 
 /* ==========================================================================
    Media Queries para Responsividade
@@ -614,33 +808,33 @@ body {
     .right-sidebar {
         width: 90%;
         max-width: 400px;
-        margin: 30px auto; /* Centraliza o painel de login abaixo do conteúdo principal */
-        position: static; /* Remove posicionamento absoluto se houver */
+        margin: 30px auto;
+        position: static;
         top: auto;
         right: auto;
     }
 
     /* Três colunas em telas médias (ajustado para flexbox) */
     .three-column-text {
-        flex-direction: column; /* Empilha as colunas em telas menores */
+        flex-direction: column;
         align-items: center;
         padding: 0 20px;
         max-width: 100%;
     }
 
     .column-item {
-        width: 90%; /* Ocupa mais largura em telas menores */
-        min-width: unset; /* Remove min-width se estiver causando problemas */
+        width: 90%;
+        min-width: unset;
     }
 
-    /* Formulário de cadastro (register-form) em telas menores */
-    .register-form {
-        max-width: 100%; /* Ocupa a largura total disponível */
-        padding: 20px; /* Ajusta o padding para telas menores */
-        gap: 15px; /* Ajusta o gap */
+    /* Formulário de cadastro (form2) em telas menores */
+    .form2 { /* Agora é .form2 que é ajustado */
+        max-width: 100%;
+        padding: 20px;
+        gap: 15px;
     }
 
-    .register-form .form-group2 {
+    .form-group2 {
         flex: 1 1 100%; /* Cada campo ocupa uma linha completa */
     }
 }
@@ -662,6 +856,43 @@ body {
     .main-text-block h2 {
         font-size: 1.3em;
     }
+
+    /* Ajustes específicos para o form2 em telas menores que 768px */
+    .form2 {
+        padding: 15px;
+        margin: 15px auto;
+        font-size: 15px;
+    }
+
+    .form-group2 {
+        margin-bottom: 20px;
+    }
+
+    .form-group2 label {
+        font-size: 1em;
+    }
+
+    .form-group2 input[type="text"],
+    .form-group2 input[type="email"],
+    .form-group2 input[type="tel"],
+    .form-group2 input[type="date"],
+    .form-group2 input[type="url"],
+    .form-group2 select,
+    .form-group2 textarea {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+
+    .form-section { /* Seção de formulário genérica */
+        margin-bottom: 30px;
+        padding: 15px;
+    }
+
+    /* Ajusta o título da seção em telas menores */
+    .form-section h2 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -679,224 +910,8 @@ body {
     .footer-links .separator {
         display: none;
     }
-}
 
-
-/* --- Seu CSS Existente para o formulário e grupos de campos --- */
-
-.form2 {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size: 16px; /* Tamanho base para todo o formulário */
-}
-
-.form-group2 {
-    margin-bottom: 25px;
-}
-
-.form-group2 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1em;
-}
-
-.form-group2 input[type="text"],
-.form-group2 input[type="email"],
-.form-group2 input[type="tel"],
-.form-group2 input[type="date"],
-.form-group2 input[type="url"],
-.form-group2 select,
-.form-group2 textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1em;
-}
-
-.radio-group label,
-.checkbox-group label {
-    margin-left: 5px;
-    margin-right: 15px;
-    display: inline-block;
-    font-size: 1em;
-}
-
-.conditional-fields {
-    margin-top: 15px;
-    padding: 10px;
-    border: 1px dashed #eee;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-    font-size: 0.95em;
-    margin-bottom: 25px;
-}
-
-.form-section {
-    margin-bottom: 40px;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #ffffff;
-}
-
-.form-section .form-group2:last-child {
-    margin-bottom: 0;
-}
-
-/* --- Media Queries para responsividade --- */
-
-/* Telas menores que 768px (tablets e celulares) */
-@media (max-width: 768px) {
-    .form2 {
-        padding: 15px; /* Reduz o padding interno do formulário */
-        margin: 15px auto; /* Reduz a margem externa */
-        font-size: 15px; /* Reduz um pouco a fonte base para telas menores */
-    }
-
-    .form-group2 {
-        margin-bottom: 20px; /* Ajusta o espaço entre perguntas em telas menores */
-    }
-
-    .form-group2 label {
-        font-size: 1em; /* Ajusta a fonte dos rótulos para o tamanho base */
-    }
-
-    .form-group2 input[type="text"],
-    .form-group2 input[type="email"],
-    .form-group2 input[type="tel"],
-    .form-group2 input[type="date"],
-    .form-group2 input[type="url"],
-    .form-group2 select,
-    .form-group2 textarea {
-        padding: 8px; /* Reduz o padding dos campos de entrada */
-        font-size: 0.95em; /* Reduz um pouco a fonte dos campos */
-    }
-
-    .form-section {
-        margin-bottom: 30px; /* Reduz o espaço entre seções grandes */
-        padding: 15px; /* Reduz o padding interno da seção */
-    }
-}
-
-/* Seu CSS Existente */
-
-.form2 {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size: 16px; /* Tamanho base para todo o formulário */
-}
-
-.form-group2 {
-    margin-bottom: 25px;
-}
-
-.form-group2 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1em;
-}
-
-.form-group2 input[type="text"],
-.form-group2 input[type="email"],
-.form-group2 input[type="tel"],
-.form-group2 input[type="date"],
-.form-group2 input[type="url"],
-.form-group2 select,
-.form-group2 textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1em;
-}
-
-.radio-group label,
-.checkbox-group label {
-    margin-left: 5px;
-    margin-right: 15px;
-    display: inline-block;
-    font-size: 1em;
-}
-
-.conditional-fields {
-    margin-top: 15px;
-    padding: 10px;
-    border: 1px dashed #eee;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-    font-size: 0.95em;
-    margin-bottom: 25px;
-}
-
-.form-section {
-    margin-bottom: 40px;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #ffffff;
-}
-
-/* --- AQUI: Estiliza os títulos das seções dentro de .form-section --- */
-.form-section h2 {
-    font-size: 1.8em; /* Ajuste este valor (ex: 24px, 1.8em) */
-    color: #0056b3; /* Cor para destacar o título */
-    margin-top: 0; /* Remove margem superior padrão do h2 */
-    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
-    text-align: center; /* Centraliza o título, se desejar */
-}
-
-.form-section .form-group2:last-child {
-    margin-bottom: 0;
-}
-
-/* --- Media Queries para responsividade (já existentes) --- */
-@media (max-width: 768px) {
-    .form2 {
-        padding: 15px;
-        margin: 15px auto;
-        font-size: 15px;
-    }
-    .form-group2 {
-        margin-bottom: 20px;
-    }
-    .form-group2 label {
-        font-size: 1em;
-    }
-    .form-group2 input[type="text"],
-    /* ... outros inputs ... */
-    .form-group2 textarea {
-        padding: 8px;
-        font-size: 0.95em;
-    }
-    .form-section {
-        margin-bottom: 30px;
-        padding: 15px;
-    }
-    /* --- AQUI: Ajusta o título da seção em telas menores --- */
-    .form-section h2 {
-        font-size: 1.8em; /* Reduz um pouco em telas menores */
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 480px) {
+    /* Ajustes para o form2 em telas muito pequenas */
     .form2 {
         width: 95%;
         padding: 10px;
@@ -910,18 +925,22 @@ body {
         font-size: 1em;
     }
     .form-group2 input[type="text"],
-    /* ... outros inputs ... */
+    .form-group2 input[type="email"],
+    .form-group2 input[type="tel"],
+    .form-group2 input[type="date"],
+    .form-group2 input[type="url"],
+    .form-group2 select,
     .form-group2 textarea {
         padding: 6px;
-        font-size: 1.2em;
+        font-size: 1.2em; /* Isso pode ser grande demais para 14px de base, revise se necessário */
     }
     .form-section {
         margin-bottom: 25px;
         padding: 10px;
     }
-    /* --- AQUI: Ajusta ainda mais o título em telas muito pequenas --- */
+    /* Ajusta ainda mais o título em telas muito pequenas */
     .form-section h2 {
-        font-size: 1.3em; /* Mais uma redução */
+        font-size: 1.3em;
         margin-bottom: 10px;
     }
     .radio-group,

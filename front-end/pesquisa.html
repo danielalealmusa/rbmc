@@ -8,27 +8,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1 class="title-section">PESQUISAR CIENTISTAS DA RBMC</h1>
-    </header>
+
+<header class="main-header">
+    <div class="logo">
+        <a href="index.html">
+            <img src="img\marcabranca-RBMC.png" alt="Rede Brasileira Mulheres Cientistas Logo">
+        </a>
+    </div>
+</header>
+   
+       
+
 
     <main>
+<div class="search-box">
+       
+         <h1 class="title-section">PESQUISAR CIENTISTAS DA RBMC</h1>
         <section class="search-section">
-            <div class="input-group full-width">
+            <div class="input-group">
                 <label for="nomePesquisadoraInput">Nome da Pesquisadora</label> <div class="search-input-wrapper">
                     <input type="text" id="nomePesquisadoraInput" placeholder="Digite o nome da pesquisadora">
-                    <button class="search-button" id="btnBuscarPesquisadora"><i class="fas fa-search"></i></button>
+                   
                 </div>
             </div>
+            <div class="input-group">
+                <label for="areaSelect">Área de Pesquisa</label>
+                <select id="areaSelect">
+                    <option value="">Selecione</option>
+                    <option value="">Todas as Áreas</option>
+                    <option value="ciencias_exatas_terra">Ciências Exatas e da Terra</option>
+                    <option value="ciencias_biologicas">Ciências Biológicas</option>
+                    <option value="engenharias">Engenharias</option>
+                        <option value="ciencias_saude">Ciências da Saúde</option>
+                        <option value="ciencias_agrarias">Ciências Agrárias</option>
+                        <option value="ciencias_sociais">Ciências Sociais </option>
+                        <option value="ciencias_humanas_linguistica">Ciências Humanas</option>
+                        <option value="letras">Letras</option>
+                        <option value="artes">Artes</option>
+                    </select>
+            </div>
 
-          
-
-        <div id="resultadosBusca">
+       
+      <div class="button-container"></div>    
+ <button class="search-button" id="btnBuscarPesquisadora"><i class="fas fa-search"></i></button>
+        
+    </div>
+    </div>
+       </main>  
+    <div id="resultadosBusca">
             <p>Os resultados da busca aparecerão aqui.</p>
         </div>
-
-    </main>
-
-    <script src="script.js"></script>
+   
+    <p> Você deseja pesquisar as iniciativas das pesquisadoras?</p>
+ <div class="button-container">
+                    <a href="http://www.redemulherescientistas.org/Publico_Listar" class="btn-base">Buscar Iniciativas</a>
+                </div>
+            
+         <img src="\front-end\img\mulheres2.png" alt="Mulheres" style="display: block; margin: 0 auto;">
+    <script src="pesquisa.js"></script>
 </body>
 </html>

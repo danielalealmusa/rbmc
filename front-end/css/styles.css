@@ -746,7 +746,7 @@ body {
     width: 300px;
     margin: 20px auto;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 15px;
 }
 .button { /* Usado em algum lugar como um botão genérico */

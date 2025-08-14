@@ -745,19 +745,24 @@ body {
     text-align: center;
     width: 300px;
     margin: 20px auto;
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
 }
 .button { /* Usado em algum lugar como um botão genérico */
       background-color: var(--color-white);
     color: #6a1a7a; /* Mantido fixo, pois não está em variáveis */
     border: none;
+    width: 100%;
     padding: 15px 20px;
-    margin: 10px 0 10px 50px; /* Margem superior e inferior de 10px, e uma margem esquerda de 20px */
+    margin: auto; /* Margem superior e inferior de 10px, e uma margem esquerda de 20px */
     max-width: 300px; /* Define a largura máxima para o botão */
     display: block; /* Garante que a margem automática funcione corretamente */
     font-size: 1em;
     cursor: pointer;
     text-align: center;
     box-shadow: var(--shadow-sm);
+    
 }
 .button:hover {
     background-color: #f0f0f0; /* Mantido fixo */

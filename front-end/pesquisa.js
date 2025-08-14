@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         resultadosBuscaDiv.innerHTML = '<p>Buscando...</p>';
 
         try {
-           
- const backendUrl = 'http://localhost:3000'; 
+
+            const backendUrl = 'https://bancodepesquisadoras.site'; 
             // Constrói os parâmetros da URL dinamicamente
             const params = new URLSearchParams();
             if (nomeParaBuscar) {
